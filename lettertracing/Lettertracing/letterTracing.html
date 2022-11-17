@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../_common_files/main.css" />
+    <link rel="stylesheet" href="../../_common_files/main__styles.css" />
+    <link rel="stylesheet" href="styles/letterTracing.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <nav style="margin: 20px" class="navigation">
+        <a href="/">На главную</a>
+      </nav>
+
+      <h3>Обведи букву ⬇</h3>
+      <!-- в поле id указывается уникальный id для данного задания -->
+      <div class="trainerTaskWrapper" id="letterTracing_task-1">
+        <div class="letterTracing_letter_wrapper">
+          <div class="letterTracing_letter_img">
+            <canvas class="letterTracing_letter_canvas"></canvas>
+            <!--вставляем нужную картинку-->
+            <img
+              class="letterTracing_letter_picture"
+              src="Images_1/letterTraicing/apple.png"
+            />
+          </div>
+
+          <!--вставляем нужный аудиофайл-->
+          <audio
+            class="letterTracing_letter_audio"
+            src="sound/letterTraicing/A.mp3"
+          >
+            Your browser does not support the
+            <code>audio</code> element.
+          </audio>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+
+    <script src="js-data/letterTracing.js" type="module"></script>
+  </body>
+</html>

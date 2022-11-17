@@ -1,0 +1,90 @@
+/* стили для демонстрации, не для шаблона */
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+h4 {
+  text-align: center;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 1370px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.trainerTaskWrapper {
+  max-width: 930px;
+  border: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+@media screen and (max-width: 1370px) {
+  .trainerTaskWrapper {
+    max-width: 600px;
+  }
+}
+
+/* стили для шаблона */
+
+/* стили для блока с кнопками */
+.resetButton,
+.checkButton {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #e9ecf4;
+  border: none;
+  border-radius: 12px;
+  background-color: #0ab7d3;
+  padding: 10px;
+  font-size: 26px;
+  color: white;
+  min-width: 100px;
+}
+.show-answer-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.show-answer-info {
+  display: flex;
+  align-items: center;
+  font-size: 26px;
+}
+
+/* стили для кнопки увеличения */
+
+.enlarge_picture {
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  cursor: zoom-in;
+}
+
+@media screen and (max-width: 1370px) {
+  .enlarge_picture {
+    width: 30px;
+    height: 30px;
+  }
+}

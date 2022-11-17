@@ -1,0 +1,9 @@
+.singleChoiсe_2_image_lesson_task {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.singleChoiсe_2_image_lesson_task > img {
+  width: 80%;
+}

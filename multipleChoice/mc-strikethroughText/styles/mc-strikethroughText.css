@@ -1,0 +1,115 @@
+.task_wrapper {
+  max-width: 1000px;
+
+  margin: 20px;
+  border: 1px solid grey;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.task_answersWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.task_answer {
+  box-sizing: border-box;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  border: 1px solid grey;
+
+  height: 150px;
+
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #e9ecf4;
+}
+.task_answer_width {
+  width: 100px;
+}
+.task_answer_height {
+  height: 100px;
+}
+.task_line {
+  text-decoration: line-through;
+  color: blue;
+  border-color: blue;
+  /* outline: 8px solid blue;
+  border-color: transparent; */
+}
+
+.task_checkTask {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.task_chek_answer {
+  display: flex;
+  align-items: center;
+  font-size: 26px;
+}
+
+.task_chek_answer span {
+  font-size: 25px;
+}
+.task_green {
+  color: green;
+  /* border: 8px solid green; */
+  border-color: green;
+  /* outline: 8px solid green;
+  border-color: transparent; */
+}
+
+.task_red {
+  /* border: 8px solid red; */
+  border-color: red;
+  /* outline: 8px solid red; */
+  color: red;
+  /* border-color: transparent; */
+}
+
+.taskBtn {
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #e9ecf4 !important;
+  border: none !important;
+  border-radius: 12px !important;
+  background-color: #0ab7d3 !important;
+  padding: 10px !important;
+  font-size: 26px !important;
+  color: white !important;
+  min-width: 100px !important;
+  box-sizing: border-box;
+}
+
+.taskBtn:hover {
+  box-shadow: -5px -5px 15px #b8b7b7, 5px 5px 15px #99999b !important;
+}
+@media screen and (max-width: 1370px) {
+  .task_answers_width {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .task_answer {
+    font-size: 18px;
+  }
+}

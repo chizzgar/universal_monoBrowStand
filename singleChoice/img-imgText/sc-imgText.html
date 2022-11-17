@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+
+    <link rel="stylesheet" href="styles/sc-imgText.css" />
+
+    <title>Единичный выбор</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav style="margin: 20px" class="navigation">
+        <a href="/">На главную</a>
+      </nav>
+
+      <h3>Единичный выбор - Картинка и текст ⬇</h3>
+      <h4>ответ: медведь</h4>
+      <div class="trainerTaskWrapper">
+        <!-- в поле id указывается уникальный id для данного задания -->
+        <div class="singleChoiceWrapper" id="task-1">
+          <ul class="singleChoiceList"></ul>
+          <!-- блок с кнопками проверки -->
+
+          <div class="show-answer-controls">
+            <button type="button" id="reset" class="resetButton">
+              сброс ↻
+            </button>
+            <div class="show-answer-info"></div>
+            <button type="button" id="test" class="checkButton">
+              проверить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <h3>Единичный выбор - Только Картинки ⬇</h3>
+      <h4>ответ: медведь</h4>
+
+      <div class="trainerTaskWrapper" >
+        <!-- в поле id указывается уникальный id для данного задания -->
+        <div class="singleChoiceWrapper" id="task-2">
+          <ul class="singleChoiceList"></ul>
+          <div class="show-answer-controls">
+            <button type="button" id="reset" class="resetButton">
+              сброс ↻
+            </button>
+            <div class="show-answer-info"></div>
+            <button type="button" id="test" class="checkButton">
+              проверить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- JS Scripts -->
+
+    <!-- Занятия -->
+
+    <script src="js-data/sc-imgText.js" type="module"></script>
+
+  </body>
+</html>

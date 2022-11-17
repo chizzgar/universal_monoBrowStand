@@ -1,0 +1,124 @@
+.dnd_sudoku_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.dnd_sudoku_imgWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  width: 110px;
+  height: 110px;
+  -webkit-box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  border-radius: 12px;
+}
+
+.dnd_sudoku_imgWrapper img {
+  max-width: 90%;
+  max-height: 90%;
+
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+.dnd_sudoku_drop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dnd_sudoku_dropeitem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 110px;
+  height: 110px;
+  -webkit-box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  border-radius: 12px;
+}
+
+.dnd_sudoku_answers {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 130px;
+  width: 100%;
+  -webkit-box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  border-radius: 12px;
+}
+
+.dnd_sudoku_answer,
+.dnd_sudoku_answer_drop {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 15px;
+  width: 110px;
+  height: 110px;
+  border-radius: 12px;
+  cursor: -webkit-grab;
+  cursor: grab;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #cbcdd3;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+@media screen and (max-width: 1370px) {
+  .dnd_sudoku_answers {
+    height: 110px;
+  }
+
+  .dnd_sudoku_imgWrapper {
+    width: 90px;
+    height: 90px;
+  }
+  .dnd_sudoku_answer,
+  .dnd_sudoku_answer_drop {
+    width: 90px;
+    height: 90px;
+  }
+}

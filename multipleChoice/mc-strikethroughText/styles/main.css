@@ -1,0 +1,28 @@
+/* стили для демонстрации, не для шаблона */
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 1370px;
+  width: 100%;
+  margin-bottom: 50px;
+}
