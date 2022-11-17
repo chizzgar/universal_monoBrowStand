@@ -1,4 +1,12 @@
-/* СТАРАЯ ПАНЕЛЬ ПРОВЕРКИ (РАСКОМЕНТИТЬ ДЛЯ НЕОБХОДИМОСТИ) */
+/* СТАРАЯ ПАНЕЛЬ ПРОВЕРКИ (РАССКОМЕНТИТЬ ДЛЯ НЕОБХОДИМОСТИ) */
+:root {
+  --background-color: #0ab7d3; /*цвет фона панели проверки*/
+  --reset: url(topCheckPanel_img/1.png); /*картинка сброса для панели проверки*/
+  --check: url(topCheckPanel_img/6.png); /*картинка проверки неактивная для панели проверки*/
+  --check-active: url(topCheckPanel_img/5.png); /*картинка проверки активная для панели проверки*/
+  --result_lose: url(topCheckPanel_img/7.png); /*картинка для неудачного ответа для панели проверки*/
+  --result_win: url(topCheckPanel_img/8.png); /*картинка для удачного ответа для панели проверки*/
+}
 
 .temporary {
   width: 70%;
@@ -15,7 +23,7 @@
   -moz-border-radius: 0.5em;
   -khtml-border-radius: 0.5em;
   padding-left: 5%;
-  background-color: #0ab7d3;
+  background-color: var(--background-color);
 }
 
 .head div {
@@ -47,18 +55,18 @@
 
 .drop {
   width: 10%;
-  background: url(../_common_files/topCheckPanel_img/1.png) no-repeat;
+  background: var(--reset) no-repeat;
   cursor: pointer;
 }
 
 .check_your {
   width: 10%;
-  background: url(../_common_files/topCheckPanel_img/6.png) no-repeat;
+  background: var(--check) no-repeat;
   cursor: pointer;
 }
 
 .check_your_active {
-  background: url(../_common_files/topCheckPanel_img/5.png) no-repeat;
+  background: var(--check-active) no-repeat;
 }
 
 .result {
@@ -68,18 +76,18 @@
 }
 
 .result_lose {
-  background: url(../_common_files/topCheckPanel_img/7.png) 0em 0em / 100% no-repeat;
+  background: var(--result_lose) 0em 0em / 100% no-repeat;
   width: 40%;
   border-radius: 10px;
 }
 
 .result_win {
-  background: url(../_common_files/topCheckPanel_img/8.png) 0em 0em / 100% no-repeat;
+  background: var(--result_win) 0em 0em / 100% no-repeat;
   width: 30%;
   border-radius: 10px;
 }
 
-/* КНОАКА ПАУЗЫ И ПЛЭЙ - ЧЁРНАЯ МИНИМАЛИСТИЧНА */
+/* КНОПКА ПАУЗЫ И ПЛЭЙ - ЧЁРНАЯ МИНИМАЛИСТИЧНАЯ */
 .buttonPlayPausePlayPause_wrap {
   position: absolute;
   top: 5px;
@@ -644,8 +652,10 @@
   height: 16px;
   border: 2px solid;
   border-radius: 100%;
-  background: -o-linear-gradient(top, currentColor 5px, transparent 0) no-repeat 2px 5px/8px 2px;
-  background: linear-gradient(to bottom, currentColor 5px, transparent 0) no-repeat 2px 5px/8px 2px;
+  background: -o-linear-gradient(top, currentColor 5px, transparent 0) no-repeat
+    2px 5px/8px 2px;
+  background: linear-gradient(to bottom, currentColor 5px, transparent 0)
+    no-repeat 2px 5px/8px 2px;
   color: #0892a7;
   margin: 5px;
 }
@@ -829,7 +839,7 @@
 }
 
 .noEventAddOpacity {
-  opacity: .3;
+  opacity: 0.3;
   pointer-events: none;
 }
 
