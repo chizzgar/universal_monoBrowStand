@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/_common_files/main.css" type="text/css" />
-    <link
-      rel="stylesheet"
-      href="/_common_files/main__styles.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="styles/alphabet_matchingUpperAndLowerCaseLetters.css"
-      type="text/css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/_common_files/main.css" type="text/css" />
+  <link rel="stylesheet" href="/_common_files/main__styles.css" type="text/css" />
+  <link rel="stylesheet" href="styles/alphabet_matchingUpperAndLowerCaseLetters.css" type="text/css" />
 
-    <title>Алфавит</title>
-  </head>
+  <title>Алфавит</title>
+</head>
 
-  <body>
-    <div class="container">
-      <nav style="margin: 20px" class="navigation">
-        <a href="/">На главную</a>
-      </nav>
+<body>
+  <div class="container">
+    <nav style="margin: 20px" class="navigation">
+      <a href="/">На главную</a>
+    </nav>
 
-      <h3>Таскалка - Алфавит - сопоставь строчные буквы с прописными ⬇</h3>
+    <h3>Таскалка - Алфавит - сопоставь строчные буквы с прописными ⬇</h3>
 
-      <!-- в поле id указывается уникальный id для данного задания -->
+    <!-- в поле id указывается уникальный id для данного задания -->
+    <div class="temporary">
 
-      <div class="trainerTaskWrapper" id="task-1">
-        <div class="alphabetWrapper_capital">
-          <div class="alphabetDropPlace_capital"></div>
-          <div class="alphabetDragPlace_capital"></div>
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="trainerTaskWrapper" id="task-1">
+          <div class="alphabetWrapper_capital">
+            <div class="alphabetDropPlace_capital"></div>
+            <div class="alphabetDragPlace_capital"></div>
+          </div>
         </div>
       </div>
+
     </div>
 
-    <script
-      src="js-data/alphabet_matchingUpperAndLowerCaseLetters.js"
-      type="module"
-    ></script>
-  </body>
+    <script src="js-data/alphabet_matchingUpperAndLowerCaseLetters.js" type="module"></script>
+</body>
 </html>
