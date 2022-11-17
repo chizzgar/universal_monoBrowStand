@@ -1,20 +1,23 @@
 import {
   dropAppend,
   dragAppend,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
+  // checkingAnswerReset,
+  // checkingAnswerNegative,
+  // checkingAnswerPositive,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements
-} from "../../../_common_files/common_scripts.js"
+  // toggleOpacityAndEventsElement,
+  // renderCheckPanel,
+  // getCheckPanelElements
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
+} from "../../../_common_files/common_scripts.js";
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "task-1";
   // массив с элементами(буквами) (1 символ), любое количество
   // каждый объект - пара элементов
   // letterCapital - записывается те символы, которые будут вверху тренажера
@@ -37,8 +40,6 @@ import {
       letterSmall: "c",
     },
     {
-
-
       data: "alphCapSmallCapital_4",
       letterCapital: "D",
       letterSmall: "d",
@@ -155,12 +156,9 @@ import {
     },
   ];
 
-
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderAlphabetMatchingUpperAndLowerCaseLetters(arrayOfElements, taskId);
 })();
-
 
 function renderAlphabetMatchingUpperAndLowerCaseLetters(
   arrayOfElements,
@@ -178,8 +176,12 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
     ".alphabetDragPlace_capital "
   );
 
-  renderCheckPanel(taskWrapper, true)
-  const { btnReset, btnTest, controlsBox, infoBox } = getCheckPanelElements(taskWrapper)
+  // const { drop, check_your, result } = getOldPanelLinks(taskWrapper);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
+
+  // renderCheckPanel(taskWrapper, true);
+  // const { btnReset, btnTest, controlsBox, infoBox } =
+  //   getCheckPanelElements(taskWrapper);
 
   // создание разметки
   createDropCardsMarkup(arrayOfElements);
@@ -189,7 +191,7 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
     ".letterCardDrop_capital"
   );
   // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  // toggleOpacityAndEventsElement(btnTest);
   alphabetDragPlace.addEventListener("pointerdown", mouseDown);
   alphabetDropPlace.addEventListener("click", localReset_letter);
 
@@ -346,10 +348,12 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
           dropAppend(elemBelow, draggingItem);
           elemBelow.children[1].style.pointerEvents = "auto";
           // закрываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+          // if (!isGameStart) {
+          //   toggleOpacityAndEventsElement(btnTest);
+          //   isGameStart = true;
+          // }
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else {
           dragAppend(alphabetDragPlace, draggingItem, findIdx);
         }
@@ -373,17 +377,19 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
         "letterCardDrop_capital_border"
       );
       elem.classList.remove("alphabetCard_colors_active");
-      removeActiveCardClass(elem)
+      removeActiveCardClass(elem);
     });
-    checkingAnswerReset(controlsBox, infoBox);
+    // checkingAnswerReset(controlsBox, infoBox);
     draggingItem = null;
     alphabetDragPlace.addEventListener("pointerdown", mouseDown);
     alphabetDropPlace.addEventListener("click", localReset_letter);
-    // скрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+    // // скрываем кнопку ПРОВЕРИТЬ
+    // if (isGameStart) {
+    //   toggleOpacityAndEventsElement(btnTest);
+    // }
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -392,20 +398,22 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
       if (
         elem.children.length > 2 &&
         elem.children[2].attributes.getNamedItem("drag-data").value ===
-        elem.attributes.getNamedItem("drop-data").value
+          elem.attributes.getNamedItem("drop-data").value
       ) {
         winCount += 1;
 
-        addRightChoiceClass(elem)
+        addRightChoiceClass(elem);
       } else {
-        addWrongChoiceClass(elem)
+        addWrongChoiceClass(elem);
       }
       elem.classList.remove("letterCardDrop_capital_border");
     });
     if (winCount === arrayOfElements.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      // checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      // checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
 
     alphabetDragPlace.removeEventListener("pointerdown", mouseDown);
@@ -430,5 +438,4 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
 
     dropAppend(alphabetDragPlace, event.target.parentElement.children[2]);
   }
-
 }

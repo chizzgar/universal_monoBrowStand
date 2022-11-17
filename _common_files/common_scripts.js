@@ -1,3 +1,61 @@
+//СКРИПТЫ ДЛЯ СТАРОЙ ПАНЕЛИ ПРОВЕРКИ
+
+// функция, которая управляет состоянием кнопки проверки
+export function checkButton_classList_changer(
+  startAction, // флаг, начато ли задание
+  callback, // функция проверки
+  check_your // сама кнопка проверки
+) {
+  if (check_your.classList.contains("check_your_active") && !startAction) {
+    check_your.classList.remove("check_your_active");
+    check_your.removeEventListener("click", callback);
+  } else if (
+    !check_your.classList.contains("check_your_active") &&
+    startAction
+  ) {
+    check_your.removeEventListener("click", callback);
+    check_your.classList.add("check_your_active");
+    check_your.addEventListener("click", callback);
+  }
+}
+
+// функция, которая показывает результат выполнения задания
+// feedBackChanger("reset", startAction, result); пример вызова при сбросе
+// feedBackChanger("win", startAction, result); пример вызова при выигрыше
+// feedBackChanger("lose", startAction, result); пример вызова при проигрыше
+
+export function feedBackChanger(
+  state, // слово win или lose, обозначающие победу или проигрыш соответственно
+  startAction, // флаг, начато ли задание
+  result // блок, который показывает результат выполнения задания
+) {
+  if ((startAction && state === "win") || state === "lose") {
+    result.classList.add(`result_${state}`);
+  } else {
+    result.classList.remove(`result_win`);
+    result.classList.remove(`result_lose`);
+  }
+}
+
+// функция, которая получает ссылки на дом-элементы панели проверки
+// const { drop, check_your, result } = getOldPanelLinks(task); - пример вызова в тренажере
+
+export function getOldPanelLinks(
+  task // контейнер-обертка тренажера
+) {
+  const interakt_zadanie = task.parentElement;
+  const headCheck = interakt_zadanie.previousElementSibling;
+  // const drop = headCheck.querySelector(".drop");
+  // const check_your = headCheck.querySelector(".check_your");
+  // const result = headCheck.querySelector(".result");
+  // return { drop, check_your, result };
+  const btnReset = headCheck.querySelector(".drop");
+  const btnTest = headCheck.querySelector(".check_your");
+  const result = headCheck.querySelector(".result");
+  return { btnReset, btnTest, result };
+}
+// конец СКРИПТЫ ДЛЯ СТАРОЙ ПАНЕЛИ ПРОВЕРКИ
+
 // увеличение картинки
 
 export function scaleImage(targetEl) {
