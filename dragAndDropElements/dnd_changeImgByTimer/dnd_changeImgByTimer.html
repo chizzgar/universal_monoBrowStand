@@ -1,50 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../_common_files/main.css" />
+    <link rel="stylesheet" href="../../_common_files/main__styles.css" />
+    <link rel="stylesheet" href="styles/dnd_changeImgByTimer.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../_common_files/main.css" />
-  <link rel="stylesheet" href="../../_common_files/main__styles.css" />
-  <link rel="stylesheet" href="styles/dnd_changeImgByTimer.css" />
+    <title>Таскалка</title>
+  </head>
 
-  <title>Таскалка</title>
-</head>
+  <body>
+    <div class="container">
+      <nav style="margin: 20px" class="navigation">
+        <a href="/">На главную</a>
+      </nav>
 
-<body>
-  <div class="container">
-    <nav style="margin: 20px" class="navigation">
-      <a href="/">На главную</a>
-    </nav>
-
-    <h3>Таскалка - Сопоставление иллюстраций со сменой ⬇</h3>
-    <h4>
-      отметь правильное поведение веселым смайлом, неправильное - грустным
-    </h4>
-    <div class="trainerTaskWrapper" id="task-1">
-      <div class="changeImgByTimer_comparePicturesWrapper">
-        <div class="changeImgByTimer_dropPlaceWrapper"></div>
-        <div class="changeImgByTimer_dragPlaceWrapper"></div>
+      <h3>Таскалка - Сопоставление иллюстраций со сменой ⬇</h3>
+      <h4>
+        отметь правильное поведение веселым смайлом, неправильное - грустным
+      </h4>
+      <div class="temporary">
+        <div class="head">
+          <div class="drop"></div>
+          <div class="save"></div>
+          <div class="check_your"></div>
+          <div class="result"></div>
+        </div>
+        <div class="interakt_zadanie">
+          <div class="trainerTaskWrapper" id="changeImgByTimer_task-1">
+            <div class="changeImgByTimer_comparePicturesWrapper">
+              <div class="changeImgByTimer_dropPlaceWrapper"></div>
+              <div class="changeImgByTimer_dragPlaceWrapper"></div>
+            </div>
+          </div>
+        </div>
       </div>
+      <h3>Таскалка - Сопоставление иллюстраций со сменой ⬇</h3>
+      <h4>сопоставь солдат с техникой</h4>
+      <div class="temporary">
+        <div class="head">
+          <div class="drop"></div>
+          <div class="save"></div>
+          <div class="check_your"></div>
+          <div class="result"></div>
+        </div>
+        <div class="interakt_zadanie">
+          <div class="trainerTaskWrapper" id="changeImgByTimer_task-2">
+            <div class="changeImgByTimer_comparePicturesWrapper">
+              <div class="changeImgByTimer_dropPlaceWrapper"></div>
+              <div class="changeImgByTimer_dragPlaceWrapper"></div>
+            </div>
+          </div>
+        </div>
       </div>
+      <!--  -->
     </div>
-    <h3>Таскалка - Сопоставление иллюстраций со сменой ⬇</h3>
-    <h4>сопоставь солдат с техникой</h4>
-    <div class="trainerTaskWrapper" id="task-2">
-      <div class="changeImgByTimer_comparePicturesWrapper">
-        <div class="changeImgByTimer_dropPlaceWrapper"></div>
-        <div class="changeImgByTimer_dragPlaceWrapper"></div>
-      </div>
-    </div>
-  </div>
 
+    <!-- JS Scripts -->
 
-  <!-- JS Scripts -->
+    <!-- Занятия -->
 
-  <!-- Занятия -->
-
-  <script src="js-data/dnd_changeImgByTimer.js" type="module"></script>
-</body>
-
+    <script src="js-data/dnd_changeImgByTimer.js" type="module"></script>
+  </body>
 </html>

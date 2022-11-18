@@ -846,6 +846,7 @@
 .trainerTaskWrapper {
   user-select: none;
   max-width: 930px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
