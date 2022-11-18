@@ -159,10 +159,10 @@ function renderPuzzle(taskId, lettersPuzzleArr) {
       clickWithoutMove = false;
       moveAt(newLocation.x, newLocation.y);
 
-      if (!event.path.includes(draggingItem)) {
+      if (!event.composedPath().includes(draggingItem)) {
         window.addEventListener("pointerup", moveOut);
       }
-      if (event.path.includes(draggingItem)) {
+      if (event.composedPath().includes(draggingItem)) {
         window.removeEventListener("pointerup", moveOut);
       }
 
