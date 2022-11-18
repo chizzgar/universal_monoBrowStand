@@ -3,27 +3,23 @@ import {
   dropAppend,
   resetSound,
   onSoundIconClick,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
   shuffleCards,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
-
   // структура ответа: answerTag:число
   const answer = {
     triangle: 4,
   };
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "dnd_copy-ManyToOne_task-1";
 
   // перетаскивание происходит посредством копирования
   // в одно поле можно перетащить несколько элементов
@@ -68,7 +64,6 @@ import {
   );
 })();
 (() => {
-
   // структура ответа: answerTag:число
   const answer = {
     square: 4,
@@ -76,7 +71,7 @@ import {
   };
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-2"
+  const taskId = "dnd_copy-ManyToOne_task-2";
   // перетаскивание происходит посредством копирования
   // в одно поле можно перетащить несколько элементов
   // массивы входящих элементов (сверху - максимум 4, снизу - максимум 6),
@@ -134,7 +129,6 @@ import {
     },
   ];
 
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderDndCopyManyToOneMarkup(
     arrayOfDropElements,
@@ -152,7 +146,7 @@ import {
   };
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-3"
+  const taskId = "dnd_copy-ManyToOne_task-3";
   // перетаскивание происходит посредством копирования
   // в одно поле можно перетащить несколько элементов
   // массивы входящих элементов (сверху - максимум 4, снизу - максимум 6),
@@ -218,7 +212,6 @@ import {
     },
   ];
 
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderDndCopyManyToOneMarkup(
     arrayOfDropElements,
@@ -237,7 +230,7 @@ import {
   };
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-4"
+  const taskId = "dnd_copy-ManyToOne_task-4";
 
   // перетаскивание происходит посредством копирования
   // в одно поле можно перетащить несколько элементов
@@ -338,7 +331,7 @@ import {
   };
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-5"
+  const taskId = "dnd_copy-ManyToOne_task-5";
 
   // перетаскивание происходит посредством копирования
   // в одно поле можно перетащить несколько элементов
@@ -443,7 +436,7 @@ function renderDndCopyManyToOneMarkup(
   const dropId = "drop";
   const dragId = "drag";
   let isGameStart = false;
-  const taskWrapper = document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
   const soundDataAttribute = "drop-data";
   let soundSetStates = {
     currentAudio: null,
@@ -488,14 +481,11 @@ function renderDndCopyManyToOneMarkup(
     createDragPictureCardsMarkup(shuffleCards([...arrayOfDragElements]))
   );
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   taskWrapper.addEventListener("click", onIconClick);
   const audioFiles = taskWrapper.querySelectorAll(".dnd_copy-ManyToOne_audio");
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+
   taskWrapper.addEventListener("pointerdown", mouseDown);
 
   btnReset.addEventListener("click", onBtnResetClick);
@@ -523,14 +513,13 @@ function renderDndCopyManyToOneMarkup(
       removeActiveCardClass(item.lastElementChild);
     });
     resetSound(soundSetStates);
-    checkingAnswerReset(controlsBox, infoBox);
+
     draggingItem = null;
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // скрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -554,9 +543,9 @@ function renderDndCopyManyToOneMarkup(
     });
 
     if (winVar === arrayOfDropElementsLength) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
 
     taskWrapper.removeEventListener("pointerdown", mouseDown);
@@ -755,22 +744,19 @@ function renderDndCopyManyToOneMarkup(
             "dnd_copy-ManyToOne_dragPlacePicture"
           )
         ) {
-           scaleImage(event.target.firstElementChild)
+          scaleImage(event.target.firstElementChild);
         } else if (
           event.target.classList.contains("dnd_copy-ManyToOne_dragPlacePicture")
         ) {
-           scaleImage(event.target)
+          scaleImage(event.target);
         }
 
         taskWrapper.removeEventListener("pointerup", onpointerup);
       }
 
       if (!clickWithoutMove && elemBelow) {
-        // открываем кнопку ПРОВЕРИТЬ
-        if (!isGameStart) {
-          toggleOpacityAndEventsElement(btnTest);
-          isGameStart = true;
-        }
+        isGameStart = true;
+        checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         if (
           elemBelow.classList.contains("dnd_copy-ManyToOne_dropPlacePart") &&
           elemBelow.children.length < maxQuantity
