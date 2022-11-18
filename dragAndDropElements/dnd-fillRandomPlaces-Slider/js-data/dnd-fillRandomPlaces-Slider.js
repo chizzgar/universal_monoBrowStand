@@ -7,21 +7,18 @@ import {
   dropAppend,
   dragAppend,
   getRandomPositionToCard,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "dnd-fillRandomPlaces-Slider_task-1";
 
   // указывается количество верно перетащенных элементов ( или общее количество из arrayOfDragElements, или любое меньшее число)
   const rightCount = 7;
@@ -114,7 +111,7 @@ import {
 })();
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-2"
+  const taskId = "dnd-fillRandomPlaces-Slider_task-2";
 
   // указывается количество верно перетащенных элементов ( или общее количество из arrayOfDragElements, или любое меньшее число)
   const rightCount = 7;
@@ -202,7 +199,7 @@ import {
 })();
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-3"
+  const taskId = "dnd-fillRandomPlaces-Slider_task-3";
 
   // указывается количество верно перетащенных элементов ( или общее количество из arrayOfDragElements, или любое меньшее число)
   const rightCount = 6;
@@ -303,7 +300,7 @@ function renderDndFillRandomPlacesSlider(
   };
 
   let maxQuantity;
-  const taskWrapper = document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
   const arrayOfDropElementsLength = arrayOfDropElements.length;
 
   // ограничения на количество перетаскиваемых в поле элементов
@@ -345,9 +342,7 @@ function renderDndFillRandomPlacesSlider(
     createDragPictureCardsMarkup(shuffleCards([...arrayOfDragElements]))
   );
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   getBlocksSizes(sliderSetStates, dragBox);
   showArrows(sliderSetStates, leftBtn, rightBtn);
@@ -356,12 +351,10 @@ function renderDndFillRandomPlacesSlider(
   if (sliderSetStates.sliderSize < sliderSetStates.sliderWrapperSize) {
     rightBtn.classList.add("noDisplayElement");
   }
-    // закрываем кнопку ПРОВЕРИТЬ
-    toggleOpacityAndEventsElement(btnTest);
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
+
   leftBtn.addEventListener("click", onBtnSliderLeftClick);
   rightBtn.addEventListener("click", onBtnSliderRightClick);
 
@@ -389,13 +382,12 @@ function renderDndFillRandomPlacesSlider(
     showArrows(sliderSetStates, leftBtn, rightBtn);
     dragBox.style.left = `${sliderSetStates.sliderShift}px`;
     draggingItem = null;
-    checkingAnswerReset(controlsBox, infoBox);
+
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -416,9 +408,9 @@ function renderDndFillRandomPlacesSlider(
     });
 
     if (winVar === rightCount) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     taskWrapper.removeEventListener("pointerdown", mouseDown);
   }
@@ -582,11 +574,9 @@ function renderDndFillRandomPlacesSlider(
           elemBelow.children.length < maxQuantity
         ) {
           dropAppend(elemBelow, draggingItem);
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else if (
           elemBelow.classList.contains(
             "dnd-fillRandomPlaces-Slider_dragPlace"
