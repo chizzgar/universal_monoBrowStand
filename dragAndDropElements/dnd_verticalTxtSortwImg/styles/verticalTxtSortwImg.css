@@ -1,9 +1,9 @@
-.verticalTxtSort_img_wrepper {
+.verticalTxtSort_img_wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 .verticalTxtSort_img_list {
@@ -12,25 +12,25 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 10%;
 }
 
 .verticalTxtSort_img_item {
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  -ms-grid-row-align: center;
+  align-self: center;
   height: 76px;
   margin: 0 10px 10px 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .verticalTxtSort_img_item img {
@@ -73,10 +73,9 @@
   -ms-flex-align: center;
   align-items: center;
   -ms-touch-action: none;
-      touch-action: none;
+  touch-action: none;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-
+  box-sizing: border-box;
 }
 
 .verticalTxtSort_img_selected {
