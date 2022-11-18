@@ -1,19 +1,17 @@
 import {
   scaleImage,
   dropAppend,
-  checkingAnswerReset,
-  checkingAnswerPositive,
   addRightChoiceClass,
   addWrongChoiceClass,
-  renderCheckPanel,
-  getCheckPanelElements,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
-   //буквы которые можно перетаскивать в слова
-   let dragLetters = ["a", "e"];
-   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-   let taskId ="letterInsert_task-1"
+  //буквы которые можно перетаскивать в слова
+  let dragLetters = ["a", "e"];
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  let taskId = "letterInsert_task-1";
   //входящие данные
   //imgSrc: - расположение картинки
   //word - слово
@@ -69,12 +67,12 @@ import {
       letters: ["h", "", "l", "p"],
     },
   ];
- 
+
   renderLetterInsert(data, taskId, dragLetters);
 })();
 
 function renderLetterInsert(data, taskId, dragLetters) {
-  const task = document.getElementById(`${taskId}`)
+  const task = document.getElementById(`${taskId}`);
   let imgSrcBox = task.querySelector(".letterInsert_img");
   let dropZone = task.querySelector(".letterInsert_drop");
   let dragZone = task.querySelector(".letterInsert_drag");
@@ -82,13 +80,14 @@ function renderLetterInsert(data, taskId, dragLetters) {
   let dataOrder = 0;
   let draggingItem;
   let elemBelow;
+  let isGameStart = false;
 
   start(data);
   filldragZone();
-  renderCheckPanel(task, false);
-  const { btnReset, controlsBox, infoBox } = getCheckPanelElements(task);
 
-  task.addEventListener("pointerdown",  mouseDown);
+  const { btnReset, result } = getOldPanelLinks(task);
+
+  task.addEventListener("pointerdown", mouseDown);
   imgSrcBox.addEventListener("pointerdown", onimgSrcClick);
   btnReset.addEventListener("click", resetTask);
 
@@ -243,6 +242,7 @@ function renderLetterInsert(data, taskId, dragLetters) {
           elemBelow = elemBelow.closest(".letterInsert_dropItem");
           dropAppend(elemBelow, draggingItem);
           checkAnswer(elemBelow);
+          isGameStart = true;
         } else {
           draggingItem.remove();
         }
@@ -281,16 +281,18 @@ function renderLetterInsert(data, taskId, dragLetters) {
         }
       });
     });
-    task.addEventListener("pointerdown",  mouseDown);
+    task.addEventListener("pointerdown", mouseDown);
 
     draggingItem = null;
-    checkingAnswerReset(controlsBox, infoBox);
+
+    isGameStart = false;
+
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function checkAnswer(dropField) {
-
     if (draggingItem.innerText === dropField.getAttribute("data-letter")) {
-      task.removeEventListener("pointerdown",  mouseDown);
+      task.removeEventListener("pointerdown", mouseDown);
 
       addRightChoiceClass(draggingItem);
       dataOrder++;
@@ -300,13 +302,11 @@ function renderLetterInsert(data, taskId, dragLetters) {
           addHiddenStyle(imgSrcBox.children[dataOrder - 1]);
           removeHiddenStyle(dropZone.children[dataOrder]);
           addHiddenStyle(dropZone.children[dataOrder - 1]);
-          task.addEventListener("pointerdown",  mouseDown);
+          task.addEventListener("pointerdown", mouseDown);
         } else {
-          checkingAnswerPositive(controlsBox, infoBox);
+          feedBackChanger("win", isGameStart, result);
         }
-
       }, 1000);
     } else addWrongChoiceClass(draggingItem);
-
   }
 }
