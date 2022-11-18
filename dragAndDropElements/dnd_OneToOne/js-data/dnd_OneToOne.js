@@ -5,21 +5,18 @@ import {
   dropAppend,
   dragAppend,
   getRandomPositionToCard,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "dnd_OneToOne_task-1";
 
   // массивы входящих картинок (максимум 5-6 элементов),
   // опционально заполняются:
@@ -140,14 +137,13 @@ import {
     },
   ];
 
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   // renderDndOneToOneMarkup(arrayOfElements, taskWrapper, imageFolder);
   renderDndOneToOneMarkup(arrayOfDropElements, arrayOfDragElements, taskId);
 })();
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-2"
+  const taskId = "dnd_OneToOne_task-2";
   // массив входящих картинок (максимум 5-6 элементов),
   // опционально заполняются:
   // 1) поле imgSrc_2 - если нужна картинка в том элементе, который перетаскивается
@@ -250,16 +246,13 @@ import {
     },
   ];
 
-
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   // renderDndOneToOneMarkup(arrayOfElements, taskWrapper, imageFolder);
   renderDndOneToOneMarkup(arrayOfDropElements, arrayOfDragElements, taskId);
 })();
 (() => {
-
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-3"
+  const taskId = "dnd_OneToOne_task-3";
 
   // массив входящих картинок (максимум 5-6 элементов),
   // опционально заполняются:
@@ -386,7 +379,7 @@ import {
 })();
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-4"
+  const taskId = "dnd_OneToOne_task-4";
 
   // массив входящих картинок (максимум 5-6 элементов),
   // опционально заполняются:
@@ -507,14 +500,13 @@ import {
     },
   ];
 
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   // renderDndOneToOneMarkup(arrayOfElements, taskWrapper, imageFolder);
   renderDndOneToOneMarkup(arrayOfDropElements, arrayOfDragElements, taskId);
 })();
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-5"
+  const taskId = "dnd_OneToOne_task-5";
   // массив входящих картинок (максимум 5-6 элементов),
   // опционально заполняются:
   // 1) поле imgSrc_2 - если нужна картинка в том элементе, который перетаскивается
@@ -637,15 +629,13 @@ import {
     },
   ];
 
-
-
   // сама функция, которая запускается, здесь ничего менять не нужно
 
   renderDndOneToOneMarkup(arrayOfDropElements, arrayOfDragElements, taskId);
 })();
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-6"
+  const taskId = "dnd_OneToOne_task-6";
   // массивы входящих картинок (максимум 5-6 элементов),
   // опционально заполняются:
   // 1) поле imgSrc, imgSrc_2 - если нужна картинка в том элементе, который перетаскивается  или к которому перетаскивают
@@ -765,8 +755,6 @@ import {
     },
   ];
 
-
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   // renderDndOneToOneMarkup(arrayOfElements, taskWrapper, imageFolder);
   renderDndOneToOneMarkup(arrayOfDropElements, arrayOfDragElements, taskId);
@@ -816,21 +804,17 @@ function renderDndOneToOneMarkup(
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfDragElements]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   const audioFiles = taskWrapper.querySelectorAll(".dnd_OneToOne_audio");
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
+
   dropBox.addEventListener("pointerdown", onDropBoxClick);
   taskWrapper.addEventListener("click", onIconClick);
-
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
 
   function onDropBoxClick(event) {
     if (
@@ -871,14 +855,13 @@ function renderDndOneToOneMarkup(
         dragBox.appendChild(item.children[1].children[1]);
       }
     });
-    checkingAnswerReset(controlsBox, infoBox);
+
     draggingItem = null;
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -900,9 +883,9 @@ function renderDndOneToOneMarkup(
     });
 
     if (winVar === dropPlacesCount) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     taskWrapper.removeEventListener("pointerdown", mouseDown);
   }
@@ -1017,15 +1000,13 @@ function renderDndOneToOneMarkup(
       } else {
         if (elemBelow.classList.contains("dnd_OneToOne_dropPlace_imageBox")) {
           dropAppend(elemBelow.parentElement, draggingItem);
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else if (
           elemBelow.closest(".dnd_OneToOne_dropPlace") &&
           elemBelow.closest(".dnd_OneToOne_dropPlace").children[2] ===
-          draggingItem
+            draggingItem
         ) {
           dropAppend(
             elemBelow.closest(".dnd_OneToOne_dropPlace"),
