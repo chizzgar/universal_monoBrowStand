@@ -6,6 +6,9 @@
 // получение кнопок
 const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
+// удалить слушатель
+btnTest.addEventListener("click", onBtnTestClick);
+
 // начало игры
 isGameStart = true;
 checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);

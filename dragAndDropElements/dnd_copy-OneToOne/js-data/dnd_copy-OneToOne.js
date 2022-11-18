@@ -3,15 +3,12 @@ import {
   dropAppend,
   resetSound,
   onSoundIconClick,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -29,7 +26,7 @@ import {
   // Если перемещаемые элементы просто нужно сопоставить с другими (без строгих ограничений), то в поле answerTag прописать одинаковые слова
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "dnd_copy-OneToOne_task-1";
 
   // указывается количество верно перетащенных элементов (или общее количество из arrayOfDragElements, или любое меньшее число)
   const rightCount = 5;
@@ -100,7 +97,6 @@ import {
     },
   ];
 
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderDndCopyOneToOneMarkup(
     arrayOfDropElements,
@@ -123,10 +119,10 @@ import {
   // Каждый объект - это данные о элементе: который будет перемещаться или к которому будут перемещать
   // Если перемещаемые элементы просто нужно сопоставить с другими (без строгих ограничений), то в поле answerTag прописать одинаковые слова
 
-    // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-    const taskId = "task-2"
-    // указывается количество верно перетащенных элементов ( или общее количество из arrayOfDragElements, или любое меньшее число)
-    const rightCount = 1;
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "dnd_copy-OneToOne_task-2";
+  // указывается количество верно перетащенных элементов ( или общее количество из arrayOfDragElements, или любое меньшее число)
+  const rightCount = 1;
 
   const arrayOfDropElements = [
     {
@@ -198,7 +194,6 @@ import {
     // },
   ];
 
-
   // const rightCount = 2;
 
   // сама функция, которая запускается, здесь ничего менять не нужно
@@ -229,7 +224,7 @@ function renderDndCopyOneToOneMarkup(
     currentAudioIcon: null,
     isPlaying: false,
   };
-  const taskWrapper =document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
 
   const dropBox = taskWrapper.querySelector(
     ".dnd_copy-OneToOne_dropPlaceWrapper"
@@ -246,18 +241,13 @@ function renderDndCopyOneToOneMarkup(
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfDragElements]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   const audioFiles = taskWrapper.querySelectorAll(".dnd_copy-OneToOne_audio");
 
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
-
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
   dropBox.addEventListener("pointerdown", onDropBoxClick);
 
   taskWrapper.addEventListener("click", onIconClick);
@@ -284,14 +274,13 @@ function renderDndCopyOneToOneMarkup(
       }
     });
     resetSound(soundSetStates);
-    checkingAnswerReset(controlsBox, infoBox);
+
     draggingItem = null;
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -314,9 +303,9 @@ function renderDndCopyOneToOneMarkup(
     });
 
     if (winVar === rightCount) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
 
     taskWrapper.removeEventListener("pointerdown", mouseDown);
@@ -461,11 +450,9 @@ function renderDndCopyOneToOneMarkup(
         ) {
           dropAppend(elemBelow.parentElement, draggingItem);
           draggingItem.classList.remove("dnd_copy-OneToOne_dnd-check");
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else {
           draggingItem.remove();
         }
