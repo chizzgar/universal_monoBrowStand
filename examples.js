@@ -21,14 +21,12 @@ feedBackChanger("win", isGameStart, result);
 feedBackChanger("lose", isGameStart, result);
 
 // html
-// <div class="temporary">
-//   <div class="head">
-//     <div class="drop"></div>
-//     <div class="save"></div>
-//     <div class="check_your"></div>
-//     <div class="result"></div>
-//   </div>
-//   <div class="interakt_zadanie">
-//     // task
-//   </div>
-// </div>;
+<div class="temporary">
+  <div class="head">
+    <div class="drop"></div>
+    <div class="save"></div>
+    <div class="check_your"></div>
+    <div class="result"></div>
+  </div>
+  <div class="interakt_zadanie">//task</div>
+</div>;
