@@ -86,7 +86,6 @@ function renderImagesChronologyMarkup(arrayOfElements, taskId) {
   taskWrapper.addEventListener("pointerdown", mouseDown);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function addClassesToElements(arrayOfElementsLength) {
     let elementsSizes;

@@ -93,7 +93,6 @@ function createСoloringBook_2_Markup(pencils, taskId, rightAnswers) {
   pencilsBox.addEventListener("click", onPencilClick);
   svgBox.addEventListener("click", onSvgClick);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function createPencilsMarkup(pencils) {
     return pencils

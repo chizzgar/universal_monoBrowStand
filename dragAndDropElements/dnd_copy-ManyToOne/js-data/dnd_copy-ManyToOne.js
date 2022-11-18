@@ -489,7 +489,6 @@ function renderDndCopyManyToOneMarkup(
   taskWrapper.addEventListener("pointerdown", mouseDown);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   dropBox.addEventListener("pointerdown", onDropBoxClick);
 

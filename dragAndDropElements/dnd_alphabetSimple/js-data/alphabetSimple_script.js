@@ -144,7 +144,7 @@ function renderAlphabetSimple(data, taskId) {
   const letterCard_drop = document.querySelectorAll(".alphabetSimpleCard_drop");
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
-  btnTest.addEventListener("click", taskChecking);
+
   btnReset.addEventListener("click", resetTask);
 
   function createLettersMarkup(data) {

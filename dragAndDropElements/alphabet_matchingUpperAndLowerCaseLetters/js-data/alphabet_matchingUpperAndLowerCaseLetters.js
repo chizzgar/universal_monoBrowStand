@@ -184,7 +184,6 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
   alphabetDropPlace.addEventListener("click", localReset_letter);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function createDropCardsMarkup(arrayOfElements) {
     arrayOfElements.forEach((elem) => {
