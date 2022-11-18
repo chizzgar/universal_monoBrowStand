@@ -9,21 +9,18 @@ import {
   dropAppend,
   dragAppend,
   getRandomPositionToCard,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "withSlider_task-1";
   // указывается количество верно перетащенных элементов ( или общее количество из dragCards, или любое меньшее число)
   const rightAnswerCount = 8;
   // массив входящих картинок для поля куда переносятся картинки (максимум 5-6 элементов),
@@ -124,16 +121,15 @@ import {
     },
   ];
 
-
   renderDndWithSlider(dropCards, dragCards, taskId, rightAnswerCount);
 })();
 
 (() => {
-   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-   const taskId = "task-2"
-   // указывается количество верно перетащенных элементов ( или общее количество из dragCards, или любое меньшее число)
-   const rightAnswerCount = 8;
- 
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "withSlider_task-2";
+  // указывается количество верно перетащенных элементов ( или общее количество из dragCards, или любое меньшее число)
+  const rightAnswerCount = 8;
+
   // массив входящих картинок для поля куда переносятся картинки (максимум 5-6 элементов),
   // в поле answerTag указывается ключевое слово для сопаставления поля для сбрасывания и картинки для сбрасывания
   const dropCards = [
@@ -230,13 +226,13 @@ import {
       text: "текст",
     },
   ];
- 
+
   renderDndWithSlider(dropCards, dragCards, taskId, rightAnswerCount);
 })();
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-3"
+  const taskId = "withSlider_task-3";
   // указывается количество верно перетащенных элементов ( или общее количество из dragCards, или любое меньшее число)
   const rightAnswerCount = 8;
   // массив входящих картинок для поля куда переносятся картинки (максимум 5-6 элементов),
@@ -359,23 +355,18 @@ import {
       text: "текст",
     },
   ];
-  
+
   renderDndWithSlider(dropCards, dragCards, taskId, rightAnswerCount);
 })();
 
-function renderDndWithSlider(
-  dropCards,
-  dragCards,
-  taskId,
-  rightAnswerCount
-) {
+function renderDndWithSlider(dropCards, dragCards, taskId, rightAnswerCount) {
   let draggingItem;
   let elemBelow;
   let isGameStart = false;
   let maxQuantity = 0;
   const dropId = "drop";
   const dragId = "drag";
-  const taskWrapper = document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
   const arrayOfDropElementsLength = dropCards.length;
   switch (arrayOfDropElementsLength) {
     case 1:
@@ -422,9 +413,7 @@ function renderDndWithSlider(
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...dragCards]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   const audioFiles = taskWrapper.querySelectorAll(".withSlider_dndIWS_audio");
 
@@ -438,12 +427,8 @@ function renderDndWithSlider(
   getBlocksSizes(sliderSet, answersWrapper);
   showArrows(sliderSet, leftBtn, rightBtn);
 
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
-
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
   leftBtn.addEventListener("click", LeftClick);
   rightBtn.addEventListener("click", RightClick);
   dropBox.addEventListener("pointerdown", onDropBoxClick);
@@ -482,14 +467,11 @@ function renderDndWithSlider(
     getBlocksSizes(sliderSet, answersWrapper);
     showArrows(sliderSet, leftBtn, rightBtn);
 
-    checkingAnswerReset(controlsBox, infoBox);
     draggingItem = null;
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
   function onBtnTestClick() {
     resetSound(soundSetStates);
@@ -507,11 +489,11 @@ function renderDndWithSlider(
         });
       }
     });
-    // if (winVar === dragCards.length) {
+
     if (winVar === rightAnswerCount) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     taskWrapper.removeEventListener("pointerdown", mouseDown);
   }
@@ -610,11 +592,9 @@ function renderDndWithSlider(
           elemBelow.children.length < maxQuantity
         ) {
           dropAppend(elemBelow, draggingItem);
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else if (
           elemBelow.classList.contains("withSlider_dragPicture") &&
           elemBelow.parentElement.parentElement.tagName !== "BODY" &&
