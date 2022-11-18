@@ -1,20 +1,17 @@
 import {
   dropAppend,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
-   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-   const taskId = "task-1"
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "dnd_MoveWordsWithCopy_task-1";
   // массив предложений, в которые нужно вставлять слова
   // в место предложения в поле text, куда нужно будет перетаскивать слово,
   //  вставлять значок флажка &#9873;
@@ -160,7 +157,6 @@ import {
       answerTag: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28],
     },
   ];
- 
 
   //сама функция, которая запускается, здесь ничего менять не нужно
   renderMoveWordsIntoSentenceWithCopyMarkup(
@@ -170,8 +166,8 @@ import {
   );
 })();
 (() => {
-   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-   const taskId = "task-2"
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "dnd_MoveWordsWithCopy_task-2";
   // массив предложений, в которые нужно вставлять слова
   // в место предложения в поле text, куда нужно будет перетаскивать слово,
   //  вставлять значок флажка &#9873;
@@ -221,7 +217,6 @@ import {
       answerTag: [4],
     },
   ];
- 
 
   //сама функция, которая запускается, здесь ничего менять не нужно
   renderMoveWordsIntoSentenceWithCopyMarkup(
@@ -240,7 +235,7 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
   let draggingItem;
   let elemBelow;
   let isGameStart = false;
-  const taskWrapper=document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
 
   const dropBox = taskWrapper.querySelector(
     ".dnd_MoveWordsWithCopy_dropPlaceWrapper"
@@ -252,17 +247,14 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
 
   dropBox.insertAdjacentHTML(
     "beforeend",
-
     createDropPictureCardsMarkup(textForRender)
   );
   dragBox.insertAdjacentHTML(
     "beforeend",
-
     createDragPictureCardsMarkup(shuffleCards([...dragTextForRender]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   const allSpans = taskWrapper.querySelectorAll(
     ".dnd_MoveWordsWithCopy_dropPlacePart"
@@ -270,10 +262,6 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
-
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
 
   function onBtnResetClick() {
     [...allSpans].forEach((el) => {
@@ -283,14 +271,12 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
       }
     });
 
-    checkingAnswerReset(controlsBox, infoBox);
     draggingItem = null;
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -310,9 +296,9 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
     });
 
     if (winCount === [...allSpans].length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
   }
 
@@ -360,7 +346,7 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
       ) {
         draggingItem = event.target.cloneNode(true);
         draggingItem.classList.add("dnd_MoveWordsWithCopy_dragPlace_clone");
-      
+
         draggingItem.style.touchAction = "none";
         shiftX = event.clientX - event.target.getBoundingClientRect().left;
         shiftY = event.clientY - event.target.getBoundingClientRect().top;
@@ -468,11 +454,9 @@ function renderMoveWordsIntoSentenceWithCopyMarkup(
           elemBelow = elemBelow.closest(".dnd_MoveWordsWithCopy_dropPlacePart");
           dropAppend(elemBelow, draggingItem);
           elemBelow = null;
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else {
           draggingItem.remove();
         }
