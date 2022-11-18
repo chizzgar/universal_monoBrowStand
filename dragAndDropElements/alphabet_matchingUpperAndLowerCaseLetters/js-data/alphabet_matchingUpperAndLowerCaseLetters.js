@@ -273,7 +273,7 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
         draggingItem.style.zIndex = 1000;
         document.body.appendChild(draggingItem);
       }
-      moveAt(event.pageX, event.pageY);
+
       let newLocation = {
         x: limits.left,
         y: limits.top,

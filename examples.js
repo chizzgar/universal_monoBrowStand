@@ -28,5 +28,5 @@ feedBackChanger("lose", isGameStart, result);
     <div class="check_your"></div>
     <div class="result"></div>
   </div>
-  <div class="interakt_zadanie">//task</div>
+  <div class="interakt_zadanie"></div>
 </div>;
