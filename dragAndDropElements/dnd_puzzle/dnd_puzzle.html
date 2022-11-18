@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../_common_files/main.css" type="text/css" />
-    <link rel="stylesheet" href="../../_common_files/main__styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="../../_common_files/main.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../../_common_files/main__styles.css"
+      type="text/css"
+    />
     <link rel="stylesheet" href="styles/pussles_style.css" type="text/css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <nav style="margin: 20px" class="navigation">
-            <a href="/">На главную</a>
-        </nav>
+      <nav style="margin: 20px" class="navigation">
+        <a href="/">На главную</a>
+      </nav>
 
-        <h3>
-            Таскалка пазлы-буквы (составь слово)
-            <br />
-            Ответы: 'robot','table','cat','red','doll'
-        </h3>
-        
-        <!-- в поле id указывается уникальный id для данного задания -->
-        <div class="trainerTaskWrapper" id="pazzle_task-1">
-            <div class="wordPazzleWrapper">
-                <div class="wordPazzle_dropWrapper oneMultiChoice_border">
-                </div>
-                <div class="wordPazzle_letters">
-                </div>
-            </div>
-            <div style="display: none;"></div>
-           
+      <h3>
+        Таскалка пазлы-буквы (составь слово)
+        <br />
+        Ответы: 'robot','table','cat','red','doll'
+      </h3>
+      <div class="temporary">
+        <div class="head">
+          <div class="drop"></div>
+          <div class="save"></div>
+          <div class="check_your"></div>
+          <div class="result"></div>
         </div>
-
+        <div class="interakt_zadanie">
+          <!-- в поле id указывается уникальный id для данного задания -->
+          <div class="trainerTaskWrapper" id="puzzle_task-1">
+            <div class="wordPuzzleWrapper">
+              <div class="wordPuzzle_dropWrapper oneMultiChoice_border"></div>
+              <div class="wordPuzzle_letters"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script defer src="js-data/puzzles_script.js" type="module"></script>
-
-</body>
-
+  </body>
 </html>
