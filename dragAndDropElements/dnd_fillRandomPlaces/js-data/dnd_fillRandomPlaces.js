@@ -2,21 +2,18 @@ import {
   scaleImage,
   dropAppend,
   dragAppend,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-1"
+  const taskId = "dnd_fillRandomPlaces_task-1";
   // порядок перетаскивания: одна картинка в одно поле
   // массивы входящих данных:
   // 1) arrayOfDropElements - минимум 3 максимум 9 элементов:
@@ -112,8 +109,6 @@ import {
     },
   ];
 
-  
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderDnDFillRandomPlacesMarkup(
     arrayOfDropElements,
@@ -122,9 +117,8 @@ import {
   );
 })();
 (() => {
-  
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-2"
+  const taskId = "dnd_fillRandomPlaces_task-2";
   // порядок перетаскивания: одна картинка в одно поле
   // массивы входящих данных:
   // 1) arrayOfDropElements - минимум 3 максимум 9 элементов:
@@ -219,7 +213,6 @@ import {
     },
   ];
 
-
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderDnDFillRandomPlacesMarkup(
     arrayOfDropElements,
@@ -228,9 +221,8 @@ import {
   );
 })();
 (() => {
-  
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-3"
+  const taskId = "dnd_fillRandomPlaces_task-3";
 
   // порядок перетаскивания: одна картинка в одно поле
   // массивы входящих данных:
@@ -343,9 +335,11 @@ function renderDnDFillRandomPlacesMarkup(
   let draggingItem;
   let elemBelow;
   let isGameStart = false;
-  const taskWrapper = document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
   const arrayDropLength = arrayOfDropElements.length;
-  const dropPlacesCount = arrayOfDropElements.filter((el) => el.answerTag).length;
+  const dropPlacesCount = arrayOfDropElements.filter(
+    (el) => el.answerTag
+  ).length;
 
   const dropBox = taskWrapper.querySelector(
     ".dnd_fillRandomPlaces_dropPlaceWrapper"
@@ -363,16 +357,13 @@ function renderDnDFillRandomPlacesMarkup(
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfDragElements]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
+
   dropBox.addEventListener("pointerdown", onDropBoxClick);
   taskWrapper.addEventListener("pointerdown", mouseDown);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
 
   function onDropBoxClick(event) {
     if (
@@ -406,14 +397,14 @@ function renderDnDFillRandomPlacesMarkup(
       }
     });
     draggingItem = null;
-    checkingAnswerReset(controlsBox, infoBox);
+
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
+
   function onBtnTestClick() {
     let winVar = 0;
     [...dropBox.children].forEach((item) => {
@@ -432,12 +423,13 @@ function renderDnDFillRandomPlacesMarkup(
     });
 
     if (winVar === dropPlacesCount) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     taskWrapper.removeEventListener("pointerdown", mouseDown);
   }
+
   function createDropPictureCardsMarkup(pictures) {
     return pictures
       .map((picture) => {
@@ -469,7 +461,8 @@ function renderDnDFillRandomPlacesMarkup(
             ? `style="${elementWidth}"`
             : `drop-data='${picture.answerTag}' style="background-image: url(${picture.imgSrc}); ${elementWidth}"`;
 
-        const isZoomIn = picture.imgSrc && "dnd_fillRandomPlaces_dropPlace_zoom";
+        const isZoomIn =
+          picture.imgSrc && "dnd_fillRandomPlaces_dropPlace_zoom";
 
         return `<div class="dnd_fillRandomPlaces_dropPlace ${elementHeight} ${isZoomIn}" ${isBackgroundAndData}>
                   ${isHiddenPart}
@@ -529,7 +522,6 @@ function renderDnDFillRandomPlacesMarkup(
         draggingItem.style.position = "absolute";
         draggingItem.style.zIndex = 1000;
         document.body.appendChild(draggingItem);
-        moveAt(event.pageX, event.pageY);
       }
 
       let newLocation = {
@@ -578,18 +570,16 @@ function renderDnDFillRandomPlacesMarkup(
       document.removeEventListener("pointermove", onMouseMove);
       draggingItem.style.cursor = "grab";
       if (clickWithoutMove) {
-         scaleImage(event.target)
+        scaleImage(event.target);
       } else if (!clickWithoutMove) {
         if (
           elemBelow.classList.contains("dnd_fillRandomPlaces_dropPlacePart") &&
           elemBelow.children.length === 0
         ) {
           dropAppend(elemBelow, draggingItem);
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else if (elemBelow === draggingItem) {
           dropAppend(draggingItemPosition, draggingItem);
         } else {
