@@ -1,8 +1,5 @@
 import {
   scaleImage,
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   removeActiveCardClass,
   addRightChoiceClass,
   addWrongChoiceClass,
@@ -10,31 +7,12 @@ import {
   resetSound,
   togglePointerEventElement,
   toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
-(() => {
-  // это уникальный id для данного задания, который был присвоен в html
-  const taskId = "writeAnswer_1_task-4";
 
-  // массив с правильными'' ответами (или числа или строки), указываются в той же последовательности, что и инпуты
-  const rightAnswers = ['There are two boards in our classroom', 'There is a parrot in our biology classrom', 'Are there posters on the walls', 'There are beautiful maps on walls','Is there a clock in your gym'];
-
-  // сама функция, которая запускается, здесь ничего менять не нужно
-  renderWriteAnswer_1_Markup(rightAnswers, taskId);
-})();
-
-(() => {
-  // это уникальный id для данного задания, который был присвоен в html
-  const taskId = "writeAnswer_1_task-5";
-
-  // массив с правильными'' ответами (или числа или строки), указываются в той же последовательности, что и инпуты
-  const rightAnswers = ['иметь', 'моч', 'ловить', 'прятать','носить'];
-
-  // сама функция, которая запускается, здесь ничего менять не нужно
-  renderWriteAnswer_1_Markup(rightAnswers, taskId);
-})();
 
 (() => {
   // это уникальный id для данного задания, который был присвоен в html
@@ -46,6 +24,7 @@ import {
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderWriteAnswer_1_Markup(rightAnswers, taskId);
 })();
+
 (() => {
   // это уникальный id для данного задания, который был присвоен в html
   const taskId = "writeAnswer_1_task-2";
@@ -66,6 +45,27 @@ import {
   // сама функция, которая запускается, здесь ничего менять не нужно
   renderWriteAnswer_1_Markup(rightAnswers, taskId);
 })();
+(() => {
+  // это уникальный id для данного задания, который был присвоен в html
+  const taskId = "writeAnswer_1_task-4";
+
+  // массив с правильными'' ответами (или числа или строки), указываются в той же последовательности, что и инпуты
+  const rightAnswers = ['There are two boards in our classroom', 'There is a parrot in our biology classrom', 'Are there posters on the walls', 'There are beautiful maps on walls', 'Is there a clock in your gym'];
+
+  // сама функция, которая запускается, здесь ничего менять не нужно
+  renderWriteAnswer_1_Markup(rightAnswers, taskId);
+})();
+
+(() => {
+  // это уникальный id для данного задания, который был присвоен в html
+  const taskId = "writeAnswer_1_task-5";
+
+  // массив с правильными'' ответами (или числа или строки), указываются в той же последовательности, что и инпуты
+  const rightAnswers = ['иметь', 'моч', 'ловить', 'прятать', 'носить'];
+
+  // сама функция, которая запускается, здесь ничего менять не нужно
+  renderWriteAnswer_1_Markup(rightAnswers, taskId);
+})();
 
 //ФУНКЦИЯ
 function renderWriteAnswer_1_Markup(rightAnswers, taskId) {
@@ -79,32 +79,27 @@ function renderWriteAnswer_1_Markup(rightAnswers, taskId) {
 
   const taskWrapper = document.querySelector(`#${taskId}`);
   const answersBox = taskWrapper.querySelector(".writeAnswer_1_task_answer");
-
   const allInputs = taskWrapper.querySelectorAll(".writeAnswer_1_task_input");
   const allInputsTask = taskWrapper.querySelectorAll("input");
   const audioFiles = taskWrapper.querySelectorAll(".writeAnswer_1_task_audio");
-
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  // получение кнопок
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   btnReset.addEventListener("click", onReloadBtnClick);
-  btnTest.addEventListener("click", onCheckTaskBtnClick);
+  btnTest.addEventListener("click", onBtnTestClick);
   answersBox.addEventListener("pointerdown", onAnswerClick);
   answersBox.addEventListener("change", onInputChange);
-
+ 
   function onInputChange(e) {
     if (e.target.tagName === "INPUT") {
       // открываем кнопку ПРОВЕРИТЬ
-      if (!isGameStart) {
-        toggleOpacityAndEventsElement(btnTest);
-        isGameStart = true;
-      }
+      isGameStart = true;
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     }
   }
+
   function onAnswerClick(e) {
+    console.log()
     if (e.target.classList.contains("buttonPlayPausePlayPause_wrap")) {
       onSoundIconClick(e, soundSetStates, audioFiles, soundDataAttribute);
     }
@@ -119,18 +114,16 @@ function renderWriteAnswer_1_Markup(rightAnswers, taskId) {
       el.value = "";
     });
     resetSound(soundSetStates);
-    checkingAnswerReset(controlsBox, infoBox);
+    // начало игры
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
     if (answersBox.classList.contains("noEventElement")) {
       togglePointerEventElement(answersBox);
     }
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
   }
 
-  function onCheckTaskBtnClick() {
+  function onBtnTestClick() {
     let winCount = 0;
     [...allInputs].forEach((el, index) => {
       if (
@@ -142,9 +135,9 @@ function renderWriteAnswer_1_Markup(rightAnswers, taskId) {
       } else addWrongChoiceClass(el);
     });
     if (winCount === rightAnswers.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     resetSound(soundSetStates);
     if (!answersBox.classList.contains("noEventElement")) {

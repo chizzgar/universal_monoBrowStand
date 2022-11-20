@@ -1,11 +1,8 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
   shuffleCards,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -40,12 +37,8 @@ function renderTextOrder(data, taskId) {
   );
 
   fillSentences();
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  // получение кнопок
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   sentences.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
@@ -140,8 +133,8 @@ function renderTextOrder(data, taskId) {
           draggingItem.parentNode.insertBefore(targetItem, nextElement);
           // открываем кнопку ПРОВЕРИТЬ
           if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
             isGameStart = true;
+            checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
           }
         }
       }
@@ -188,11 +181,10 @@ function renderTextOrder(data, taskId) {
     sentences.addEventListener("pointerdown", mouseDown);
     sentences.innerHTML = "";
     fillSentences();
-    checkingAnswerReset(controlsBox, infoBox);
-    // закрываем кнопку ПРОВЕРИТЬ
     if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
       isGameStart = false;
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+      feedBackChanger("reset", isGameStart, result);
     }
   }
 
@@ -210,9 +202,9 @@ function renderTextOrder(data, taskId) {
     });
 
     if (winVar === rightData.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
 
     sentences.removeEventListener("pointerdown", mouseDown);
