@@ -1,7 +1,6 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
+  addRightChoiceClass,
+  addWrongChoiceClass,
   checkButton_classList_changer,
   feedBackChanger,
   getOldPanelLinks,
@@ -140,8 +139,8 @@ function renderEditableSentences(data, taskId) {
   const statusTrue = "true";
   const statusFalse = "false";
 
-  const task = document.querySelector(`#${taskId}`);
-  const sentences = task.querySelector(
+  const taskWrapper = document.querySelector(`#${taskId}`);
+  const sentences = taskWrapper.querySelector(
     ".editableSentences_textChanging_sentences"
   );
 
@@ -158,7 +157,6 @@ function renderEditableSentences(data, taskId) {
   }
 
   function onReloadBtnClick() {
-    checkingAnswerReset(controlsBox, infoBox);
     sentences.innerHTML = "";
     fillSentences();
     sentences.addEventListener("keydown", onChangeSentence);
@@ -186,14 +184,14 @@ function renderEditableSentences(data, taskId) {
       });
       if (winCount === elem.children.length) {
         winVar += 1;
-        feedBackChanger("win", isGameStart, result);
-      } else feedBackChanger("lose", isGameStart, result);
+        addRightChoiceClass(elem);
+      } else addWrongChoiceClass(elem);
     });
 
     if (winVar === data.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     sentences.removeEventListener("keydown", onChangeSentence);
   }
