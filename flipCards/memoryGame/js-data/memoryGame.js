@@ -1,12 +1,10 @@
 import {
   scaleImage,
-  checkingAnswerPositive,
-  checkingAnswerReset,
   getRandomPositionToCard,
   shuffleCards,
-  renderCheckPanel,
-  getCheckPanelElements,
   togglePointerEventElement,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -158,6 +156,7 @@ function renderMemoryGameMarkup(arrayOfElements, taskId, coverImage) {
   let firstCard;
   let secondCard;
   let lockBoard = false;
+  let isGameStart = false;
 
   let timerId;
 
@@ -172,8 +171,8 @@ function renderMemoryGameMarkup(arrayOfElements, taskId, coverImage) {
     "beforeend",
     createPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
-  renderCheckPanel(taskWrapper, false);
-  const { btnReset, controlsBox, infoBox } = getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   const cards = taskWrapper.querySelectorAll(".memoryCards_1_memoryCard");
 
@@ -250,13 +249,18 @@ function renderMemoryGameMarkup(arrayOfElements, taskId, coverImage) {
       el.lastElementChild.classList.add("memoryCards_1_memoryCardFace_hidden");
     });
     shuffle([...cards]);
-    checkingAnswerReset(controlsBox, infoBox);
+    isGameStart = false;
+
+    feedBackChanger("reset", isGameStart, result);
+
     if (listContainer.classList.contains("noEventElement")) {
       togglePointerEventElement(listContainer);
     }
   }
 
   function onCardClick(e) {
+    isGameStart = true;
+
     if (e.target.classList.contains("memoryCards_1_enlarge_picture")) {
       scaleImage(e.target.parentElement);
     }
@@ -290,7 +294,8 @@ function renderMemoryGameMarkup(arrayOfElements, taskId, coverImage) {
         el.classList.contains("memoryCards_1_is-flipped")
       ).length === [...cards].length
     ) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
+
       togglePointerEventElement(listContainer);
     }
   }
