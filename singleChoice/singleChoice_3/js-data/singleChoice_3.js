@@ -1,8 +1,5 @@
 import {
   scaleImage,
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   removeActiveCardClass,
   addCheckClass,
   addRightChoiceClass,
@@ -11,9 +8,9 @@ import {
   resetSound,
   getRandomPositionToCard,
   shuffleCards,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 // ВЫЗОВ ФУНКЦИИ ДЛЯ СЛУЧАЯ КАРТИНКА + ЗВУК + ТЕКСТ
@@ -282,32 +279,25 @@ function renderSingleChoice_3_Markup(arrayOfElements, rightAnswer, taskId) {
     createPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   listContainer.addEventListener("pointerdown", onListItemClick);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   const audioFiles = taskWrapper.querySelectorAll(".singleChoice_3_audio");
 
   function onBtnResetClick(e) {
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
 
     currentActiveCard && removeActiveCardClass(currentActiveCard);
 
     [...listContainer.children].forEach((el) => getRandomPositionToCard(el));
 
     resetSound(soundSetStates);
-    checkingAnswerReset(controlsBox, infoBox);
+
     currentActiveCard = null;
 
     listContainer.addEventListener("pointerdown", onListItemClick);
@@ -316,10 +306,12 @@ function renderSingleChoice_3_Markup(arrayOfElements, rightAnswer, taskId) {
   function onBtnTestClick(e) {
     if (currentActiveCard && currentActiveCard.dataset.name === rightAnswer) {
       addRightChoiceClass(currentActiveCard);
-      checkingAnswerPositive(controlsBox, infoBox);
+
+      feedBackChanger("win", isGameStart, result);
     } else {
       addWrongChoiceClass(currentActiveCard);
-      checkingAnswerNegative(controlsBox, infoBox);
+
+      feedBackChanger("lose", isGameStart, result);
     }
 
     resetSound(soundSetStates);
@@ -394,16 +386,15 @@ function renderSingleChoice_3_Markup(arrayOfElements, rightAnswer, taskId) {
     } else imgEl = e.target;
 
     if (!isGameStart) {
-      // открываем кнопку ПРОВЕРИТЬ
-      toggleOpacityAndEventsElement(btnTest);
       isGameStart = true;
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     }
 
     if (imgEl.classList.contains("targetChoice_color")) {
       removeActiveCardClass(imgEl);
-      // закрываем кнопку ПРОВЕРИТЬ
+
       isGameStart = false;
-      toggleOpacityAndEventsElement(btnTest);
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     } else if (imgEl.classList.contains("singleChoice_3_Item")) {
       currentActiveCard && removeActiveCardClass(currentActiveCard);
       addCheckClass(imgEl);
