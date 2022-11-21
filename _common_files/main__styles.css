@@ -63,12 +63,10 @@
   width: 10%;
   background: var(--check) no-repeat;
   cursor: pointer;
-  pointer-events: none;
 }
 
 .check_your_active {
   background: var(--check-active) no-repeat;
-  pointer-events: auto;
 }
 
 .result {
