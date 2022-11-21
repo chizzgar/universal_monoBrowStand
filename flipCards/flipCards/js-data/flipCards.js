@@ -2,8 +2,7 @@ import {
   scaleImage,
   onSoundIconClick,
   resetSound,
-  renderCheckPanel,
-  getCheckPanelElements,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -225,8 +224,9 @@ function renderFlipCardsMarkup(itemsToImage, taskId) {
     "beforeend",
     createPictureCardsMarkup(itemsToImage)
   );
-  renderCheckPanel(task, false);
-  const { btnReset } = getCheckPanelElements(task);
+
+  const { btnReset } = getOldPanelLinks(task);
+
   const cards = task.querySelectorAll(".flipCards_1_flipCard");
   const audioFiles = task.querySelectorAll(".flipCards_1_flipCard_audio");
 

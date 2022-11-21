@@ -1,13 +1,10 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   onSoundIconClick,
   resetSound,
   togglePointerEventElement,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -135,27 +132,20 @@ function renderMultipleChoice_1(data, taskId, rightAnswer) {
     isPlaying: false,
   };
   let isGameStart = false;
-  console.log(rightAnswer);
 
   const task = document.querySelector(`#${taskId}`);
   const field = task.querySelector(".multipleChoice_1_inputList");
 
   field.insertAdjacentHTML("beforeend", createPictureCardsMarkup([...data]));
 
-  renderCheckPanel(task, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(task);
+  const { btnReset, btnTest, result } = getOldPanelLinks(task);
 
   const audioFiles = task.querySelectorAll(".multipleChoice_1_audio");
 
   let inputs = task.querySelectorAll(".multipleChoice_1_input");
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
 
   field.addEventListener("click", onAudioIconClick);
   field.addEventListener("change", changeAnswer);
-
-  btnTest.addEventListener("click", onCheckTaskBtnClick);
   btnReset.addEventListener("click", onReloadBtnClick);
 
   function createPictureCardsMarkup(data) {
@@ -185,9 +175,12 @@ function renderMultipleChoice_1(data, taskId, rightAnswer) {
   function changeAnswer(e) {
     if (e.target.classList.contains("multipleChoice_1_input")) {
       if (!isGameStart) {
-        // открываем кнопку ПРОВЕРИТЬ
-        toggleOpacityAndEventsElement(btnTest);
         isGameStart = true;
+        checkButton_classList_changer(
+          isGameStart,
+          onCheckTaskBtnClick,
+          btnTest
+        );
       }
 
       const isCheckedInput = [...inputs].some((item) => {
@@ -195,9 +188,12 @@ function renderMultipleChoice_1(data, taskId, rightAnswer) {
       });
 
       if (!isCheckedInput) {
-        // закрываем кнопку ПРОВЕРИТЬ
         isGameStart = false;
-        toggleOpacityAndEventsElement(btnTest);
+        checkButton_classList_changer(
+          isGameStart,
+          onCheckTaskBtnClick,
+          btnTest
+        );
       }
     }
   }
@@ -224,9 +220,9 @@ function renderMultipleChoice_1(data, taskId, rightAnswer) {
     });
 
     if (answer === winvar) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     if (!field.classList.contains("noEventElement")) {
       togglePointerEventElement(field);
@@ -240,14 +236,14 @@ function renderMultipleChoice_1(data, taskId, rightAnswer) {
       item.checked = 0;
     });
 
-    checkingAnswerReset(controlsBox, infoBox);
     if (field.classList.contains("noEventElement")) {
       togglePointerEventElement(field);
     }
-    // закрываем кнопку ПРОВЕРИТЬ
+
     if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
       isGameStart = false;
+      checkButton_classList_changer(isGameStart, onCheckTaskBtnClick, btnTest);
+      feedBackChanger("reset", isGameStart, result);
     }
   }
 }

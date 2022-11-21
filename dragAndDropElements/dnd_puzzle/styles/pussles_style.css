@@ -1,4 +1,4 @@
-.wordPazzleWrapper {
+.wordPuzzleWrapper {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -21,7 +21,7 @@
   position: relative;
 }
 
-.wordPazzle_dropWrapper {
+.wordPuzzle_dropWrapper {
   width: 100%;
   height: 50%;
   padding-right: 5%;
@@ -43,7 +43,7 @@
   box-shadow: 0 20px 10px -6px rgb(190, 188, 188);
 }
 
-.wordPazzle_letters {
+.wordPuzzle_letters {
   width: 100%;
   height: 45%;
   display: -webkit-box;
@@ -59,13 +59,13 @@
   align-items: center;
 }
 
-.wordPazzle_dropWord {
+.wordPuzzle_dropWord {
   width: 107px;
   height: 140px;
   /* border: 1px solid black; */
 }
 
-.wordPazzle_letter {
+.wordPuzzle_letter {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -75,16 +75,16 @@
   position: relative;
   width: 140px;
   -ms-touch-action: none;
-      touch-action: none;
+  touch-action: none;
 }
 
-.wordPazzle_letter_img {
+.wordPuzzle_letter_img {
   pointer-events: none;
   width: inherit;
   /* width: 250px; */
 }
 
-.wordPazzle_letter_p {
+.wordPuzzle_letter_p {
   position: absolute;
   pointer-events: none;
   left: 42%;
@@ -93,7 +93,7 @@
   font-size: 70px;
 }
 
-.wordPazzle_wrapper_wellDone {
+.wordPuzzle_wrapper_wellDone {
   /* top: -45%; */
   position: absolute;
   display: -webkit-box;
@@ -108,11 +108,11 @@
   align-items: center;
 }
 
-.wordPazzle_wellDoneParrot {
+.wordPuzzle_wellDoneParrot {
   width: 50%;
 }
 
-.wordPazzle_wellDOne_p {
+.wordPuzzle_wellDOne_p {
   pointer-events: none;
 
   font-weight: bold;
@@ -120,11 +120,11 @@
 }
 
 @media screen and (max-width: 1370px) {
-  .wordPazzle_dropWrapper {
+  .wordPuzzle_dropWrapper {
     height: 42%;
   }
 
-  .wordPazzle_letter {
+  .wordPuzzle_letter {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -133,7 +133,7 @@
     position: relative;
     width: 125px;
   }
-  .wordPazzle_letter_img {
+  .wordPuzzle_letter_img {
     pointer-events: none;
     /* width: inherit; */
     /* shape-rendering: geometricPrecision;
@@ -143,12 +143,12 @@
     clip-rule: evenodd; */
     /* width: 100%; */
   }
-  .wordPazzle_letter_p {
+  .wordPuzzle_letter_p {
     left: 40%;
     top: -30%;
   }
 
-  .wordPazzle_dropWrapper {
+  .wordPuzzle_dropWrapper {
     width: 616px;
     height: 50%;
     padding-right: 5%;
@@ -159,18 +159,18 @@
     -ms-flex-align: end;
     align-items: flex-end;
   }
-  .wordPazzle_dropWord {
+  .wordPuzzle_dropWord {
     width: 95px;
     height: 135px;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .wordPazzle_dropWrapper {
+  .wordPuzzle_dropWrapper {
     height: 42%;
   }
 
-  .wordPazzle_letter {
+  .wordPuzzle_letter {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -179,19 +179,19 @@
     position: relative;
     width: 83px;
   }
-  .wordPazzle_letter_img {
+  .wordPuzzle_letter_img {
     pointer-events: none;
     width: inherit;
     /* width: 130px; */
   }
-  .wordPazzle_letter_p {
+  .wordPuzzle_letter_p {
     left: 38%;
     top: -42%;
     font-weight: bold;
     font-size: 50px;
   }
 
-  .wordPazzle_dropWrapper {
+  .wordPuzzle_dropWrapper {
     width: 480px;
     height: 50%;
     padding-right: 5%;
@@ -202,18 +202,18 @@
     -ms-flex-align: end;
     align-items: flex-end;
   }
-  .wordPazzle_dropWord {
+  .wordPuzzle_dropWord {
     width: 63px;
     height: 136px;
   }
 }
 
 @media screen and (max-width: 720px) {
-  .wordPazzle_dropWrapper {
+  .wordPuzzle_dropWrapper {
     height: 42%;
   }
 
-  .wordPazzle_letter {
+  .wordPuzzle_letter {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -222,19 +222,19 @@
     position: relative;
     width: 63px;
   }
-  .wordPazzle_letter_img {
+  .wordPuzzle_letter_img {
     pointer-events: none;
     width: inherit;
     /* width: 130px; */
   }
-  .wordPazzle_letter_p {
+  .wordPuzzle_letter_p {
     left: 38%;
     top: -30%;
     font-weight: bold;
     font-size: 35px;
   }
 
-  .wordPazzle_dropWrapper {
+  .wordPuzzle_dropWrapper {
     width: 480px;
     height: 50%;
     padding-right: 5%;
@@ -245,7 +245,7 @@
     -ms-flex-align: end;
     align-items: flex-end;
   }
-  .wordPazzle_dropWord {
+  .wordPuzzle_dropWord {
     width: 49px;
     height: 136px;
   }

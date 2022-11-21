@@ -2,21 +2,18 @@ import {
   dropAppend,
   dragAppend,
   getRandomPositionToCard,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
-   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-   const taskId = "chronoNum_task-1"
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "chronoNum_task-1";
   // массив входящих данных (максимум 9-10 элементов),
   // в поле text указывается число
   // в поле answerTag указывается наличие(true) или отсутствие(false) элемента для перетаскивания(пропуск)
@@ -60,18 +57,73 @@ import {
       id: 8,
       text: "n",
       answerTag: "true",
-    }
+    },
+  ];
+
+  renderNumberChronology(arrayOfElements, taskId);
+})();
+(() => {
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "chronoNum_task-2";
+  // массив входящих данных (максимум 9-10 элементов),
+  // в поле text указывается число
+  // в поле answerTag указывается наличие(true) или отсутствие(false) элемента для перетаскивания(пропуск)
+  const arrayOfElements = [
+    {
+      id: 1,
+      text: "1",
+      answerTag: "true",
+    },
+    {
+      id: 2,
+      text: "2",
+      answerTag: "true",
+    },
+    {
+      id: 3,
+      text: "3",
+      answerTag: "false",
+    },
+    {
+      id: 4,
+      text: "4",
+      answerTag: "true",
+    },
+    {
+      id: 5,
+      text: "5",
+      answerTag: "true",
+    },
+    {
+      id: 6,
+      text: "6",
+      answerTag: "true",
+    },
+    {
+      id: 7,
+      text: "7",
+      answerTag: "true",
+    },
+    {
+      id: 8,
+      text: "8",
+      answerTag: "false",
+    },
+    {
+      id: 9,
+      text: "9",
+      answerTag: "true",
+    },
   ];
 
   renderNumberChronology(arrayOfElements, taskId);
 })();
 
-
 function renderNumberChronology(arrayOfElements, taskId) {
   let draggingItem;
   let elemBelow;
   let isGameStart = false;
-  const taskWrapper = document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
   const dropBox = taskWrapper.querySelector(".chronoNum_dropPlaceWrapper");
   const dragBox = taskWrapper.querySelector(".chronoNum_dragPlaceWrapper");
 
@@ -83,15 +135,11 @@ function renderNumberChronology(arrayOfElements, taskId) {
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
 
   function createDropPictureCardsMarkup(pictures) {
     return pictures
@@ -125,14 +173,13 @@ function renderNumberChronology(arrayOfElements, taskId) {
         dragBox.appendChild(item.children[1]);
       }
     });
-    checkingAnswerReset(controlsBox, infoBox);
+
     taskWrapper.addEventListener("pointerdown", mouseDown);
     draggingItem = null;
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -158,9 +205,9 @@ function renderNumberChronology(arrayOfElements, taskId) {
       }
     });
     if (winCount === temp) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
   }
 
@@ -191,7 +238,6 @@ function renderNumberChronology(arrayOfElements, taskId) {
       draggingItem.style.top = pageY - shiftY + "px";
     }
 
-    // elemBelow = document.elementFromPoint(event.clientX, event.clientY);
     let clickWithoutMove = true;
 
     function onMouseMove(event) {
@@ -250,11 +296,9 @@ function renderNumberChronology(arrayOfElements, taskId) {
 
       if (elemBelow.classList.contains("chronoNum_dropPlace")) {
         dropAppend(elemBelow.parentElement, draggingItem);
-        // открываем кнопку ПРОВЕРИТЬ
-        if (!isGameStart) {
-          toggleOpacityAndEventsElement(btnTest);
-          isGameStart = true;
-        }
+
+        isGameStart = true;
+        checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
       } else {
         dragAppend(dragBox, draggingItem, findIdx);
       }

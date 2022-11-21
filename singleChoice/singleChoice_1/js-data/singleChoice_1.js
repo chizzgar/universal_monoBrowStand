@@ -1,13 +1,10 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   onSoundIconClick,
   resetSound,
   togglePointerEventElement,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -159,11 +156,8 @@ function renderSingleChoice_1(data, taskId, rightAnswer) {
   const field = task.querySelector(".singleChoice_1_inputList");
 
   field.insertAdjacentHTML("beforeend", cardsMarkup(data));
-  renderCheckPanel(task, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(task);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(task);
 
   let inputs = task.querySelectorAll(".singleChoice_1-input");
   const audioFiles = task.querySelectorAll(".singleChoice_1-audio");
@@ -173,7 +167,6 @@ function renderSingleChoice_1(data, taskId, rightAnswer) {
   });
 
   field.addEventListener("click", onAudioIconClick);
-  btnTest.addEventListener("click", onCheckTaskBtnClick);
   btnReset.addEventListener("click", onReloadBtnClick);
 
   function onAudioIconClick(e) {
@@ -210,17 +203,16 @@ function renderSingleChoice_1(data, taskId, rightAnswer) {
   function changeAnswer(e) {
     answer = e.target.value;
     if (!isGameStart) {
-      // открываем кнопку ПРОВЕРИТЬ
-      toggleOpacityAndEventsElement(btnTest);
       isGameStart = true;
+      checkButton_classList_changer(isGameStart, onCheckTaskBtnClick, btnTest);
     }
   }
 
   function onCheckTaskBtnClick() {
     if (answer === rightAnswer) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
 
     resetSound(soundSetStates);
@@ -234,16 +226,13 @@ function renderSingleChoice_1(data, taskId, rightAnswer) {
     });
     answer = null;
 
-    checkingAnswerReset(controlsBox, infoBox);
-
     resetSound(soundSetStates);
     if (field.classList.contains("noEventElement")) {
       togglePointerEventElement(field);
     }
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onCheckTaskBtnClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 }

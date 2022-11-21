@@ -1,8 +1,5 @@
 import {
   scaleImage,
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   getRandomPositionToCard,
   shuffleCards,
   getBlocksSizes,
@@ -11,9 +8,9 @@ import {
   showArrows,
   dragAppend,
   dropAppend,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -321,11 +318,8 @@ function renderImagesPuzzleMarkup(
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfDragElements]))
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   addSizesToDropPlaceWrapper(orientation, numberOfPuzzlePieces);
 
@@ -341,7 +335,6 @@ function renderImagesPuzzleMarkup(
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
   leftBtn.addEventListener("click", onSliderBtnLeftClick);
   rightBtn.addEventListener("click", onSliderBtnRightClick);
   dropBox.addEventListener("pointerdown", onDropBoxClick);
@@ -423,15 +416,15 @@ function renderImagesPuzzleMarkup(
 
     dragBox.style.left = `${sliderSetStates.sliderShift}px`;
     draggingItem = null;
-    checkingAnswerReset(controlsBox, infoBox);
+
     taskWrapper.addEventListener("pointerdown", mouseDown);
     dropBox.addEventListener("pointerdown", onDropBoxClick);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
+
   function onBtnTestClick() {
     let winVar = 0;
     [...dropBox.lastElementChild.children].forEach((item) => {
@@ -446,9 +439,9 @@ function renderImagesPuzzleMarkup(
     });
 
     if (winVar === numberOfPuzzlePieces) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     taskWrapper.removeEventListener("pointerdown", mouseDown);
     dropBox.removeEventListener("pointerdown", onDropBoxClick);
@@ -576,9 +569,8 @@ function renderImagesPuzzleMarkup(
         if (elemBelow.classList.contains("dnd_imagesPuzzle_dropPlacePart")) {
           dropAppend(elemBelow.parentElement, draggingItem);
           if (!isGameStart) {
-            // открываем кнопку ПРОВЕРИТЬ
-            toggleOpacityAndEventsElement(btnTest);
             isGameStart = true;
+            checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
           }
         } else {
           dragAppend(dragBox, draggingItem, findIdx);

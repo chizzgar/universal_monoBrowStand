@@ -1,22 +1,19 @@
 import {
   dropAppend,
   dragAppend,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
   scaleImage,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId ="dnd_chronology_task-1"
+  const taskId = "dnd_chronology_task-1";
   // массив входящих картинок (максимум 5-6 элементов),
   // в поле answerTag указывается порядковый номер картинки в правильном ответе
   const arrayOfElements = [
@@ -83,15 +80,12 @@ function renderImagesChronologyMarkup(arrayOfElements, taskId) {
     "beforeend",
     createNumbersCardsMarkup(arrayOfElements)
   );
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
+
   taskWrapper.addEventListener("pointerdown", mouseDown);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function addClassesToElements(arrayOfElementsLength) {
     let elementsSizes;
@@ -139,13 +133,12 @@ function renderImagesChronologyMarkup(arrayOfElements, taskId) {
         dragBox.appendChild(item.children[1]);
       }
     });
-    checkingAnswerReset(controlsBox, infoBox);
+
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // cкрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
     draggingItem = null;
   }
 
@@ -167,9 +160,9 @@ function renderImagesChronologyMarkup(arrayOfElements, taskId) {
     });
 
     if (winCount === arrayOfElements.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
   }
   function mouseDown(event) {
@@ -259,15 +252,12 @@ function renderImagesChronologyMarkup(arrayOfElements, taskId) {
       document.removeEventListener("pointermove", onMouseMove);
       draggingItem.style.cursor = "grab";
       if (clickWithoutMove) {
-        scaleImage(event.target)
+        scaleImage(event.target);
       } else {
         if (elemBelow.classList.contains("chronoDropBox")) {
           dropAppend(elemBelow, draggingItem);
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
         } else {
           dragAppend(dragBox, draggingItem, findIdx);
         }

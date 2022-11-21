@@ -1,17 +1,14 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   removeActiveCardClass,
   addCheckClass,
   addRightChoiceClass,
   addWrongChoiceClass,
   shuffleCards,
   getRandomPositionToCard,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
   togglePointerEventElement,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -123,12 +120,7 @@ function renderMultipleChoice_5(arrayOfElements, rightAnswer, taskId) {
     createPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   listContainer.addEventListener("click", matchingHandler);
   btnReset.addEventListener("click", onBtnResetClick);
@@ -162,32 +154,21 @@ function renderMultipleChoice_5(arrayOfElements, rightAnswer, taskId) {
   }
 
   function onBtnResetClick() {
-    checkingAnswerReset(controlsBox, infoBox);
     [...listContainer.children].forEach((item) => {
       removeActiveCardClass(item);
       getRandomPositionToCard(item);
       const videoEl = item.querySelector("video");
       videoEl.pause();
       videoEl.currentTime = 0;
-      // if (videoEl.classList.contains("noEventElement")) {
-      //   togglePointerEventElement(videoEl);
-      // }
-      // item.firstElementChild.pause();
-      // item.firstElementChild.currentTime = 0;
-      // if (item.firstElementChild.classList.contains("noEventElement")) {
-      //   togglePointerEventElement(item.firstElementChild);
-      // }
     });
 
-    // listContainer.addEventListener("click", matchingHandler);
     if (listContainer.classList.contains("noEventElement")) {
       togglePointerEventElement(listContainer);
     }
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -207,25 +188,19 @@ function renderMultipleChoice_5(arrayOfElements, rightAnswer, taskId) {
       }
     });
     if (winCount === rightAnswersLength) {
-      checkingAnswerPositive(controlsBox, infoBox);
-    } else checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
+    } else {
+      feedBackChanger("lose", isGameStart, result);
+    }
 
     [...listContainer.children].forEach((el) => {
       const videoEl = el.querySelector("video");
       videoEl.pause();
       videoEl.currentTime = 0;
-      // if (!videoEl.classList.contains("noEventElement")) {
-      //   togglePointerEventElement(videoEl);
-      // }
-      // el.firstElementChild.pause();
-      // if (!el.firstElementChild.classList.contains("noEventElement")) {
-      //   togglePointerEventElement(el.firstElementChild);
-      // }
     });
     if (!listContainer.classList.contains("noEventElement")) {
       togglePointerEventElement(listContainer);
     }
-    // listContainer.removeEventListener("click", matchingHandler);
   }
 
   function matchingHandler(e) {
@@ -246,9 +221,8 @@ function renderMultipleChoice_5(arrayOfElements, rightAnswer, taskId) {
     }
 
     if (!isGameStart) {
-      // открываем кнопку ПРОВЕРИТЬ
-      toggleOpacityAndEventsElement(btnTest);
       isGameStart = true;
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     }
 
     if (matchedItem) {
@@ -262,9 +236,8 @@ function renderMultipleChoice_5(arrayOfElements, rightAnswer, taskId) {
       el.classList.contains("targetChoice_color")
     );
     if (!isSelectedItems) {
-      // закрываем кнопку ПРОВЕРИТЬ
       isGameStart = false;
-      toggleOpacityAndEventsElement(btnTest);
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     }
   }
 }

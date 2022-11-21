@@ -1,7 +1,4 @@
-import {
-  renderCheckPanel,
-  getCheckPanelElements,
-} from "../../../_common_files/common_scripts.js";
+import { getOldPanelLinks } from "../../../_common_files/common_scripts.js";
 (() => {
   // это уникальный id для данного задания, который был присвоен в html
   const taskId = "coloringBook_1_task-1";
@@ -124,8 +121,8 @@ function createColoringBook_1_Markup(pencils, taskId) {
   const svgBox = taskWrapper.querySelector(".coloringBook_1_coloringImage");
 
   pencilsBox.insertAdjacentHTML("beforeend", createPencilsMarkup(pencils));
-  renderCheckPanel(taskWrapper, false);
-  const { btnReset } = getCheckPanelElements(taskWrapper);
+
+  const { btnReset } = getOldPanelLinks(taskWrapper);
 
   pencilsBox.addEventListener("click", onPencilClick);
   svgBox.addEventListener("click", onSvgClick);

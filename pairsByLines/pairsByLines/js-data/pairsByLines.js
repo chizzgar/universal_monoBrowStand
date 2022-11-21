@@ -1,7 +1,4 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   removeActiveCardClass,
   addCheckClass,
   addRightChoiceClass,
@@ -10,9 +7,9 @@ import {
   resetSound,
   getRandomPositionToCard,
   shuffleCards,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -143,18 +140,15 @@ function renderFindCoupleByLines(data, taskId) {
   const rightSide = task.querySelector(".findCoupleByLines_1_findCouple_right");
 
   fillTask();
-  renderCheckPanel(task, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(task);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(task);
 
   const allAudioFiles = task.querySelectorAll(
     ".findCoupleByLines_1_findCouple_audio"
   );
 
   btnReset.addEventListener("click", onReloadBtnClick);
-  btnTest.addEventListener("click", onCheckTaskBtnClick);
+
   table.addEventListener("click", startSelect);
 
   function playSoundsButton(soundSrc, id, column) {
@@ -231,9 +225,12 @@ function renderFindCoupleByLines(data, taskId) {
       e.target.classList.contains("findCoupleByLines_1_findCouple_item_text")
     ) {
       if (!isGameStart) {
-        // открываем кнопку ПРОВЕРИТЬ
-        toggleOpacityAndEventsElement(btnTest);
         isGameStart = true;
+        checkButton_classList_changer(
+          isGameStart,
+          onCheckTaskBtnClick,
+          btnTest
+        );
       }
       let elem = e.target.closest(".findCoupleByLines_1_findCouple_item");
       if (
@@ -367,16 +364,12 @@ function renderFindCoupleByLines(data, taskId) {
       });
     });
 
-    checkingAnswerReset(controlsBox, infoBox);
-
     resetSound(soundSetStates);
     table.addEventListener("click", startSelect);
 
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onCheckTaskBtnClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onCheckTaskBtnClick() {
@@ -400,9 +393,9 @@ function renderFindCoupleByLines(data, taskId) {
     });
 
     if (winVar === data.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     resetSound(soundSetStates);
   }

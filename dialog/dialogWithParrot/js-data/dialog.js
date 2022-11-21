@@ -1,12 +1,10 @@
 import {
   scaleImage,
-  checkingAnswerPositive,
-  checkingAnswerReset,
   onSoundIconClick,
   resetSound,
-  renderCheckPanel,
-  getCheckPanelElements,
   togglePointerEventElement,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -147,6 +145,7 @@ import {
 function renderDirectDialogue(taskId, opponentWords, studentAnswers) {
   let stage = 0;
   const studentAnswersLength = studentAnswers.length;
+  let isGameStart = false;
 
   const dropId = "drop";
   const dragId = "drag";
@@ -184,19 +183,18 @@ function renderDirectDialogue(taskId, opponentWords, studentAnswers) {
 
   taskWrapper.insertAdjacentHTML("beforeend", createAudioTagMarkup(audioArray));
 
-  renderCheckPanel(taskWrapper, false);
-  const { btnReset, controlsBox, infoBox } = getCheckPanelElements(taskWrapper);
+  const { btnReset, result } = getOldPanelLinks(taskWrapper);
 
   const audioFiles = taskWrapper.querySelectorAll(".directDialogue_1_audio");
 
   startbtn.addEventListener("click", start);
   btnReset.addEventListener("click", resetTask);
-  // taskWrapper.addEventListener("click", onTaskElementsClick);
+
   taskWrapper.addEventListener("pointerdown", onTaskElementsClick);
 
   function start() {
     dialog_blure.style.display = "none";
-
+    isGameStart = true;
     let phrase = createQuestionsMarkup(opponentWords[stage]);
     dialog.append(phrase);
 
@@ -243,7 +241,7 @@ function renderDirectDialogue(taskId, opponentWords, studentAnswers) {
         setTimeout(
           () => {
             togglePointerEventElement(taskWrapper.firstElementChild);
-            checkingAnswerPositive(controlsBox, infoBox);
+            feedBackChanger("win", isGameStart, result);
           },
 
           1500
@@ -321,7 +319,8 @@ function renderDirectDialogue(taskId, opponentWords, studentAnswers) {
     answers.innerHTML = "";
     stage = 0;
     dialog_blure.style.display = "flex";
-    checkingAnswerReset(controlsBox, infoBox);
+
+    feedBackChanger("reset", isGameStart, result);
     resetSound(soundSetStates);
     if (taskWrapper.firstElementChild.classList.contains("noEventElement")) {
       togglePointerEventElement(taskWrapper.firstElementChild);

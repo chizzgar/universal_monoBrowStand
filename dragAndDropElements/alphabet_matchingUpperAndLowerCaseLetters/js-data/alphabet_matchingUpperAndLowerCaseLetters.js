@@ -184,7 +184,6 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
   alphabetDropPlace.addEventListener("click", localReset_letter);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function createDropCardsMarkup(arrayOfElements) {
     arrayOfElements.forEach((elem) => {
@@ -273,7 +272,7 @@ function renderAlphabetMatchingUpperAndLowerCaseLetters(
         draggingItem.style.zIndex = 1000;
         document.body.appendChild(draggingItem);
       }
-      moveAt(event.pageX, event.pageY);
+
       let newLocation = {
         x: limits.left,
         y: limits.top,

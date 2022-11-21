@@ -3,11 +3,9 @@ import {
   dropAppend,
   dragAppend,
   getRandomPositionToCard,
-  checkingAnswerReset,
-  checkingAnswerPositive,
   shuffleCards,
-  renderCheckPanel,
-  getCheckPanelElements,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -43,7 +41,7 @@ import {
       srcShadow: "Images_1/dnd-imgWithShadow/DOH_3-4_27_4_20.png",
     },
   ];
-  
+
   // вызов самой функции, ничего менять не нужно
   renderImagesWithShadowMarkup(arrayOfElements, taskId);
 })();
@@ -52,6 +50,7 @@ import {
 function renderImagesWithShadowMarkup(arrayOfElements, taskId) {
   let draggingItem;
   let elemBelow;
+  let isGameStart = false;
 
   const arrayOfElementsLength = arrayOfElements.length;
 
@@ -72,8 +71,8 @@ function renderImagesWithShadowMarkup(arrayOfElements, taskId) {
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
-  renderCheckPanel(taskWrapper, false);
-  const { btnReset, controlsBox, infoBox } = getCheckPanelElements(taskWrapper);
+
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   dragBox.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
@@ -120,7 +119,10 @@ function renderImagesWithShadowMarkup(arrayOfElements, taskId) {
     [...dropBox.children].forEach((el) =>
       el.classList.remove("dnd_imgWithShadow_dropPlace-animated")
     );
-    checkingAnswerReset(controlsBox, infoBox);
+
+    isGameStart = false;
+
+    feedBackChanger("reset", isGameStart, result);
     draggingItem = null;
   }
 
@@ -215,8 +217,10 @@ function renderImagesWithShadowMarkup(arrayOfElements, taskId) {
           dropAppend(elemBelow, draggingItem);
 
           elemBelow.classList.add("dnd_imgWithShadow_dropPlace-animated");
+          isGameStart = true;
+
           if (dragBox.children.length === 0) {
-            checkingAnswerPositive(controlsBox, infoBox);
+            feedBackChanger("win", isGameStart, result);
           }
         } else {
           dragAppend(dragBox, draggingItem, findIdx);

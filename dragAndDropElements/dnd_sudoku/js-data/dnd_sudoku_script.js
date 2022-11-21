@@ -1,14 +1,11 @@
 import {
   dropAppend,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   addRightChoiceClass,
   addWrongChoiceClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
   scaleImage,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -198,15 +195,10 @@ function renderSudoku(data, answers, taskId) {
   fillTask();
   const dropeitems = taskWrapper.querySelectorAll(".dnd_sudoku_dropeitem");
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   btnReset.addEventListener("click", onResetClick);
-  btnTest.addEventListener("click", оnTestClick);
+
   taskWrapper.addEventListener("pointerdown", mouseDown);
   taskWrapper.addEventListener("pointerdown", imageClick);
 
@@ -341,11 +333,9 @@ function renderSudoku(data, answers, taskId) {
             dropAppend(elemBelow, draggingItem);
 
             elemBelow = null;
-            // открываем кнопку ПРОВЕРИТЬ
-            if (!isGameStart) {
-              toggleOpacityAndEventsElement(btnTest);
-              isGameStart = true;
-            }
+
+            isGameStart = true;
+            checkButton_classList_changer(isGameStart, оnTestClick, btnTest);
           } else {
             draggingItem.remove();
           }
@@ -366,13 +356,11 @@ function renderSudoku(data, answers, taskId) {
       if (item.children.length) {
         [...item.children][0].remove();
       }
-      checkingAnswerReset(controlsBox, infoBox);
     });
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, оnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function оnTestClick() {
@@ -392,9 +380,9 @@ function renderSudoku(data, answers, taskId) {
     taskWrapper.removeEventListener("pointerdown", mouseDown);
 
     if (winVar === dropeitems.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
   }
   function fillTask() {

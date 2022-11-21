@@ -5,21 +5,18 @@ import {
   dragAppend,
   resetSound,
   onSoundIconClick,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements
-} from "../../../_common_files/common_scripts.js"
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
+} from "../../../_common_files/common_scripts.js";
 
 (() => {
-   // это уникальный id для данного задания, который был присвоен в html
-   const taskId = "dnd_soundToSomething_task-1";
+  // это уникальный id для данного задания, который был присвоен в html
+  const taskId = "dnd_soundToSomething_task-1";
   // массив входящих картинок ( до 6 элементов),
   // поля imgSrc, text, audioSrc_2 заполняются опционально, если контента нет, оставлять ''
   // в поле answerTag вписывается слово по которому будет сверяться правильность сопоставления звука и картинки
@@ -74,13 +71,11 @@ import {
     },
   ];
 
- 
-
   renderDnDImagesWithSoundMarkup(arrayOfElements, taskId);
 })();
 (() => {
-   // это уникальный id для данного задания, который был присвоен в html
-   const taskId = "dnd_soundToSomething_task-2";
+  // это уникальный id для данного задания, который был присвоен в html
+  const taskId = "dnd_soundToSomething_task-2";
   // массив входящих картинок (от 6 до 10 элементов),
   // поля imgSrc, text, audioSrc_2 заполняются опционально, если контента нет, оставлять ''
   // в поле answerTag вписывается слово по которому будет сверяться правильность сопоставления звука и картинки
@@ -117,13 +112,11 @@ import {
     },
   ];
 
- 
-
   renderDnDImagesWithSoundMarkup(arrayOfElements, taskId);
 })();
 (() => {
-   // это уникальный id для данного задания, который был присвоен в html
-   const taskId = "dnd_soundToSomething_task-3";
+  // это уникальный id для данного задания, который был присвоен в html
+  const taskId = "dnd_soundToSomething_task-3";
   // массив входящих картинок (от 6 до 10 элементов),
   // поля imgSrc, text, audioSrc_2 заполняются опционально, если контента нет, оставлять ''
   // в поле answerTag вписывается слово по которому будет сверяться правильность сопоставления звука и картинки
@@ -169,13 +162,11 @@ import {
     },
   ];
 
- 
-
   renderDnDImagesWithSoundMarkup(arrayOfElements, taskId);
 })();
 (() => {
-   // это уникальный id для данного задания, который был присвоен в html
-   const taskId = "dnd_soundToSomething_task-4";
+  // это уникальный id для данного задания, который был присвоен в html
+  const taskId = "dnd_soundToSomething_task-4";
   // массив входящих картинок (от 6 до 10 элементов),
   // поля imgSrc, text, audioSrc_2 заполняются опционально, если контента нет, оставлять ''
   // в поле answerTag вписывается слово по которому будет сверяться правильность сопоставления звука и картинки
@@ -230,8 +221,6 @@ import {
     },
   ];
 
- 
-
   renderDnDImagesWithSoundMarkup(arrayOfElements, taskId);
 })();
 
@@ -246,11 +235,11 @@ function renderDnDImagesWithSoundMarkup(arrayOfElements, taskId) {
   let soundSetStates = {
     currentAudio: null,
     currentAudioIcon: null,
-    isPlaying: false
+    isPlaying: false,
   };
 
   const taskWrapper = document.querySelector(`#${taskId}`);
- 
+
   const dropBox = taskWrapper.querySelector(
     ".dnd_soundToSomething_dropPlaceWrapper"
   );
@@ -266,26 +255,22 @@ function renderDnDImagesWithSoundMarkup(arrayOfElements, taskId) {
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
-  renderCheckPanel(taskWrapper, true)
-  const {btnReset,btnTest,controlsBox,infoBox}=getCheckPanelElements(taskWrapper) 
 
-  const audioFiles = taskWrapper.querySelectorAll(
-    ".dnd_imagesWithSound_audio"
-  );
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
+
+  const audioFiles = taskWrapper.querySelectorAll(".dnd_imagesWithSound_audio");
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
 
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
+
   dropBox.addEventListener("pointerdown", onDropBoxClick);
 
-  taskWrapper.addEventListener('click', onIconClick)
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  taskWrapper.addEventListener("click", onIconClick);
 
   function onIconClick(e) {
-    if (e.target.classList.contains('buttonPlayPausePlayPause_wrap')) {
-      onSoundIconClick(e, soundSetStates, audioFiles, soundDataAttribute)
+    if (e.target.classList.contains("buttonPlayPausePlayPause_wrap")) {
+      onSoundIconClick(e, soundSetStates, audioFiles, soundDataAttribute);
     }
   }
 
@@ -300,43 +285,43 @@ function renderDnDImagesWithSoundMarkup(arrayOfElements, taskId) {
 
     [...dropBox.children].forEach((item) => {
       if (item.children[1].children.length === 2) {
-        getRandomPositionToCard(item.children[1].children[1])
+        getRandomPositionToCard(item.children[1].children[1]);
         removeActiveCardClass(item.children[1].children[1]);
         dragBox.appendChild(item.children[1].children[1]);
       }
       item.children[1].children[0].classList.remove("wrongChoice_answered");
     });
-    checkingAnswerReset(controlsBox, infoBox);
+
     draggingItem = null;
     taskWrapper.addEventListener("pointerdown", mouseDown);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
+
   function onBtnTestClick() {
     let winVar = 0;
     resetSound(soundSetStates);
     [...dropBox.children].forEach((item) => {
       if (item.children[1].children.length === 2) {
-        if (item.children[1].children[0].attributes.getNamedItem("drop-data")
-          .value ===
+        if (
+          item.children[1].children[0].attributes.getNamedItem("drop-data")
+            .value ===
           item.children[1].children[1].attributes.getNamedItem("drag-data")
             .value
         ) {
           winVar += 1;
 
-          addRightChoiceClass(item.children[1].children[1])
-        } else
-          addWrongChoiceClass(item.children[1].children[1])
+          addRightChoiceClass(item.children[1].children[1]);
+        } else addWrongChoiceClass(item.children[1].children[1]);
       }
     });
 
     if (winVar === arrayOfElements.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     taskWrapper.removeEventListener("pointerdown", mouseDown);
   }
@@ -434,12 +419,10 @@ function renderDnDImagesWithSoundMarkup(arrayOfElements, taskId) {
           )
         ) {
           dropAppend(elemBelow.parentElement, draggingItem);
-          // открываем кнопку ПРОВЕРИТЬ
-          if (!isGameStart) {
-            toggleOpacityAndEventsElement(btnTest);
-            isGameStart = true;
-          }
-          elemBelow = null
+
+          isGameStart = true;
+          checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+          elemBelow = null;
         } else {
           dragAppend(dragBox, draggingItem, findIdx);
         }
@@ -447,7 +430,7 @@ function renderDnDImagesWithSoundMarkup(arrayOfElements, taskId) {
       draggingItem.removeEventListener("pointerup", onpointerup);
     }
   }
-  
+
   function createDropPictureCardsMarkup(pictures) {
     return pictures
       .map((picture) => {

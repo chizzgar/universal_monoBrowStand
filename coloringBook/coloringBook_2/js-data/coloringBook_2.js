@@ -1,10 +1,7 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
   togglePointerEventElement,
 } from "../../../_common_files/common_scripts.js";
 (() => {
@@ -88,18 +85,14 @@ function createСoloringBook_2_Markup(pencils, taskId, rightAnswers) {
   const svgBox = taskWrapper.querySelector(".coloringBook_2_coloringImage");
 
   pencilsBox.insertAdjacentHTML("beforeend", createPencilsMarkup(pencils));
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
 
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
+
   const drawings = taskWrapper.querySelectorAll("[neededcolor]");
 
   pencilsBox.addEventListener("click", onPencilClick);
   svgBox.addEventListener("click", onSvgClick);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function createPencilsMarkup(pencils) {
     return pencils
@@ -145,14 +138,17 @@ function createСoloringBook_2_Markup(pencils, taskId, rightAnswers) {
     });
 
     if (winCount === drawings.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
 
-    if (!svgBox.parentElement.classList.contains("noEventElement")) {
-      togglePointerEventElement(svgBox.parentElement);
+    if (!taskWrapper.classList.contains("noEventElement")) {
+      togglePointerEventElement(taskWrapper);
     }
+    [...pencilsBox.children].forEach((pencil) => {
+      pencil.classList.remove("coloringBook_2_pencilActive");
+    });
   }
 
   function onPencilClick(e) {
@@ -166,12 +162,12 @@ function createСoloringBook_2_Markup(pencils, taskId, rightAnswers) {
 
   function onSvgClick(e) {
     if (e.target.classList.contains("coloringBook_2_coloringImage")) return;
-    // открываем кнопку ПРОВЕРИТЬ
-    if (!isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = true;
-    }
+
     e.target.parentElement.style.fill = currentColor;
+    if (currentColor) {
+      isGameStart = true;
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    }
   }
 
   function onBtnResetClick() {
@@ -186,14 +182,14 @@ function createСoloringBook_2_Markup(pencils, taskId, rightAnswers) {
     [...pencilsBox.children].forEach((pencil) => {
       pencil.classList.remove("coloringBook_2_pencilActive");
     });
-    checkingAnswerReset(controlsBox, infoBox);
-    // скрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
-    if (svgBox.parentElement.classList.contains("noEventElement")) {
-      togglePointerEventElement(svgBox.parentElement);
+    currentColor = null;
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
+
+    if (taskWrapper.classList.contains("noEventElement")) {
+      togglePointerEventElement(taskWrapper);
     }
   }
 }

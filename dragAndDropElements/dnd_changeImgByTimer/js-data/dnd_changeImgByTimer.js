@@ -2,19 +2,18 @@ import {
   scaleImage,
   dropAppend,
   dragAppend,
-  checkingAnswerReset,
-  checkingAnswerPositive,
   shuffleCards,
-  renderCheckPanel,
-  getCheckPanelElements
-} from "../../../_common_files/common_scripts.js"
+  feedBackChanger,
+  getOldPanelLinks,
+  togglePointerEventElement,
+} from "../../../_common_files/common_scripts.js";
 
 // тип тренажера 1
 (() => {
   //тип тренажера:
   // 1 - если требуется возврат перетаскиваемой картинки на прежнее место для использования ее дальше
   // 2 - если перетаскиваемая картинка при дальнейшем выполнении задания не участвует
-  const taskId = "task-1"
+  const taskId = "changeImgByTimer_task-1";
 
   //в зависимости от типа тренажера:
   // 1 - в simulatorType указывается true
@@ -104,12 +103,11 @@ import {
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
 
-
   renderDndChangeImgByTimerMarkup(
     dropZoneElements,
     dragZoneElements,
     taskId,
-    simulatorType,
+    simulatorType
   );
 })();
 
@@ -120,7 +118,7 @@ import {
   // 2 - если перетаскиваемая картинка при дальнейшем выполнении задания не участвует, то указывается - false
 
   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-  const taskId = "task-2"
+  const taskId = "changeImgByTimer_task-2";
   //в зависимости от типа тренажера:
   // 1- в simulatorType указывается true
   // 2 - в simulatorType указывается false
@@ -189,16 +187,13 @@ import {
     // },
   ];
 
-
-
   // здесь указывается имя папки, где хранятся все картинки к заданиям
-
 
   renderDndChangeImgByTimerMarkup(
     dropZoneElements,
     dragZoneElements,
     taskId,
-    simulatorType,
+    simulatorType
   );
 })();
 
@@ -207,19 +202,23 @@ function renderDndChangeImgByTimerMarkup(
   dropZoneElements,
   dragZoneElements,
   taskId,
-  simulatorType,
+  simulatorType
 ) {
   let draggingItem;
   let elemBelow;
   let imgCount = 0;
-  let actions = true
+  let isGameStart = false;
 
   const taskWrapper = document.getElementById(`${taskId}`);
 
   const lastImg = dropZoneElements.length - 1;
 
-  const dropBox = taskWrapper.querySelector(".changeImgByTimer_dropPlaceWrapper");
-  const dragBox = taskWrapper.querySelector(".changeImgByTimer_dragPlaceWrapper");
+  const dropBox = taskWrapper.querySelector(
+    ".changeImgByTimer_dropPlaceWrapper"
+  );
+  const dragBox = taskWrapper.querySelector(
+    ".changeImgByTimer_dragPlaceWrapper"
+  );
 
   dropBox.insertAdjacentHTML(
     "beforeend",
@@ -229,17 +228,15 @@ function renderDndChangeImgByTimerMarkup(
     "beforeend",
     createDragPictureCardsMarkup(shuffleCards([...dragZoneElements]))
   );
-
-  renderCheckPanel(taskWrapper, false)
-
-  const { btnReset, controlsBox, infoBox } = getCheckPanelElements(taskWrapper)
+  const { btnReset, result } = getOldPanelLinks(taskWrapper);
 
   dragBox.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
   dropBox.addEventListener("pointerdown", onDropBoxClick);
 
   function onDropBoxClick(event) {
-    if (!event.target.classList.contains("changeImgByTimer_dropPlaceImage")) return;
+    if (!event.target.classList.contains("changeImgByTimer_dropPlaceImage"))
+      return;
     scaleImage(event.target);
   }
 
@@ -253,22 +250,27 @@ function renderDndChangeImgByTimerMarkup(
     if (!simulatorType) {
       [...dropBox.children].forEach((el, index) => {
         if (el.children[1].firstElementChild) {
-          el.children[1].firstElementChild.classList.remove("changeImgByTimer_visually-hidden");
+          el.children[1].firstElementChild.classList.remove(
+            "changeImgByTimer_visually-hidden"
+          );
           let randomPos = Math.floor(Math.random() * 12);
           el.children[1].firstElementChild.style.order = randomPos;
           dragBox.append(el.children[1].firstElementChild);
         }
-
       });
     }
-    actions = true
-    checkingAnswerReset(controlsBox, infoBox)
+
+    isGameStart = false;
+
+    feedBackChanger("reset", isGameStart, result);
     imgCount = 0;
     draggingItem = null;
+    if (taskWrapper.classList.contains("noEventElement")) {
+      togglePointerEventElement(taskWrapper);
+    }
   }
 
   function mouseDown(event) {
-    if (!actions) return
     if (event.button !== 0) return;
     if (!event.target.classList.contains("changeImgByTimer_dragPlace")) return;
 
@@ -292,8 +294,6 @@ function renderDndChangeImgByTimerMarkup(
       bottom: taskWrapper.offsetHeight + taskWrapper.offsetTop,
       left: taskWrapper.offsetLeft,
     };
-
-    // moveAt(event.pageX, event.pageY);
 
     function moveAt(pageX, pageY) {
       draggingItem.style.left = pageX - shiftX + "px";
@@ -348,10 +348,10 @@ function renderDndChangeImgByTimerMarkup(
       window.removeEventListener("pointerup", moveOut);
       document.removeEventListener("pointermove", onMouseMove);
     }
-    draggingItem.addEventListener('pointerup', onpointerup)
+    draggingItem.addEventListener("pointerup", onpointerup);
     function onpointerup() {
       if (clickWithoutMove) {
-        scaleImage(event.target)
+        scaleImage(event.target);
       }
       document.removeEventListener("pointermove", onMouseMove);
       draggingItem.style.cursor = "grab";
@@ -359,19 +359,19 @@ function renderDndChangeImgByTimerMarkup(
       if (
         elemBelow.classList.contains("changeImgByTimer_dropPlacePart") &&
         draggingItem.attributes.getNamedItem("drag-data").value ===
-        elemBelow.attributes.getNamedItem("drop-data").value
+          elemBelow.attributes.getNamedItem("drop-data").value
       ) {
         dropAppend(elemBelow, draggingItem);
         timerFunc();
       } else {
         dragAppend(dragBox, draggingItem, findIdx);
       }
-      draggingItem.removeEventListener('pointerup', onpointerup)
-    };
+      draggingItem.removeEventListener("pointerup", onpointerup);
+    }
   }
   function timerFunc() {
     setTimeout(() => {
-      imgChanger()
+      imgChanger();
       simulatorType && addChildElement(dragBox, draggingItem);
     }, 500);
   }
@@ -382,16 +382,21 @@ function renderDndChangeImgByTimerMarkup(
 
   function imgChanger() {
     if (imgCount === lastImg) {
-      checkingAnswerPositive(controlsBox, infoBox)
-      actions = false
+      feedBackChanger("win", isGameStart, result);
+      togglePointerEventElement(taskWrapper);
     }
 
     if (imgCount < lastImg) {
-      [...dropBox.children][imgCount].classList.add("changeImgByTimer_visually-hidden");
+      isGameStart = true;
+
+      [...dropBox.children][imgCount].classList.add(
+        "changeImgByTimer_visually-hidden"
+      );
       imgCount += 1;
 
-
-      [...dropBox.children][imgCount].classList.remove("changeImgByTimer_visually-hidden");
+      [...dropBox.children][imgCount].classList.remove(
+        "changeImgByTimer_visually-hidden"
+      );
       !simulatorType && hideDragginItem();
     }
   }

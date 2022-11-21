@@ -3,21 +3,18 @@ import {
   dropAppend,
   dragAppend,
   getRandomPositionToCard,
-  checkingAnswerReset,
-  checkingAnswerNegative,
-  checkingAnswerPositive,
   shuffleCards,
   addRightChoiceClass,
   addWrongChoiceClass,
   removeActiveCardClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
-   // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
-   const taskId = "closestTop_task-1"
+  // это контейнер для данного задания, для каждого нужно будет вписывать свой id, который был присвоен в html
+  const taskId = "closestTop_task-1";
 
   // массив входящих картинок (максимум 5-6 элементов),
   // в поле answerTag указывается уникальное слово, по которому будет сверяться картинка и ее часть
@@ -67,7 +64,7 @@ import {
       answerTag: "green",
     },
   ];
- 
+
   // вызов самой функции, ничего менять не нужно
   renderDnDClosestTopMarkup(arrayOfElements, taskId);
 })();
@@ -76,7 +73,7 @@ function renderDnDClosestTopMarkup(arrayOfElements, taskId) {
   let draggingItem;
   let elemBelow;
   let isGameStart = false;
-  const taskWrapper = document.getElementById(`${taskId}`)
+  const taskWrapper = document.getElementById(`${taskId}`);
   const arrayOfElementsLength = arrayOfElements.length;
 
   let elementsSizesClass = addClassesToElements(
@@ -98,13 +95,10 @@ function renderDnDClosestTopMarkup(arrayOfElements, taskId) {
 
   dragBox.classList.add(`${dragHeightClass}`);
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   taskWrapper.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
   dropBox.addEventListener("pointerdown", onDropBoxClick);
 
   function onDropBoxClick(event) {
@@ -112,9 +106,6 @@ function renderDnDClosestTopMarkup(arrayOfElements, taskId) {
       scaleImage(event.target);
     }
   }
-
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
 
   function onBtnResetClick() {
     [...dropBox.children].forEach((item) => {
@@ -125,14 +116,12 @@ function renderDnDClosestTopMarkup(arrayOfElements, taskId) {
       removeActiveCardClass(item);
     });
 
-    checkingAnswerReset(controlsBox, infoBox);
     taskWrapper.addEventListener("pointerdown", mouseDown);
     draggingItem = null;
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
   function onBtnTestClick() {
@@ -152,9 +141,9 @@ function renderDnDClosestTopMarkup(arrayOfElements, taskId) {
       }
     });
     if (winVar === arrayOfElements.length) {
-      checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
-      checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
   }
 
@@ -263,11 +252,9 @@ function renderDnDClosestTopMarkup(arrayOfElements, taskId) {
         elemBelow.classList.contains("closestTop_dropPlace_imageBox")
       ) {
         dropAppend(elemBelow.parentElement, draggingItem);
-        // открываем кнопку ПРОВЕРИТЬ
-        if (!isGameStart) {
-          toggleOpacityAndEventsElement(btnTest);
-          isGameStart = true;
-        }
+
+        isGameStart = true;
+        checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
       } else {
         dragAppend(dragBox, draggingItem, findIdx);
       }
