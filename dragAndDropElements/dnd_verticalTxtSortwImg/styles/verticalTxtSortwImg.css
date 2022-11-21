@@ -4,6 +4,8 @@
   display: flex;
   -ms-flex-pack: distribute;
   justify-content: space-around;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .verticalTxtSort_img_list {
@@ -21,6 +23,8 @@
   -ms-flex-align: center;
   align-items: center;
   width: 10%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .verticalTxtSort_img_item {
@@ -37,6 +41,8 @@
   max-height: 100%;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .verticalTxtSort_img_task_list {
@@ -54,6 +60,8 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .verticalTxtSort_img_task_item {
@@ -76,6 +84,7 @@
   touch-action: none;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-size: 80%;
 }
 
 .verticalTxtSort_img_selected {
