@@ -12,6 +12,9 @@ import {
   renderCheckPanel,
   getCheckPanelElements,
   togglePointerEventElement,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -115,15 +118,17 @@ function renderSingleChoice_5_Markup(arrayOfElements, rightAnswer, taskId) {
     createCardsMarkup(shuffleCards([...arrayOfElements]))
   );
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  // renderCheckPanel(taskWrapper, true);
+  // const { btnReset, btnTest, controlsBox, infoBox } =
+  //   getCheckPanelElements(taskWrapper);
+  // // закрываем кнопку ПРОВЕРИТЬ
+  // toggleOpacityAndEventsElement(btnTest);
+
+  // получение кнопок
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   listContainer.addEventListener("click", matchingHandler);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function createCardsMarkup(pictures) {
     return pictures
@@ -162,14 +167,17 @@ function renderSingleChoice_5_Markup(arrayOfElements, rightAnswer, taskId) {
         togglePointerEventElement(el.firstElementChild);
       }
     });
-    checkingAnswerReset(controlsBox, infoBox);
+    // checkingAnswerReset(controlsBox, infoBox);
     listContainer.addEventListener("click", matchingHandler);
     currentActiveCard = null;
     // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
+    // if (isGameStart) {
+    //   toggleOpacityAndEventsElement(btnTest);
+    //   isGameStart = false;
+    // }
   }
 
   function onBtnTestClick() {
@@ -182,10 +190,12 @@ function renderSingleChoice_5_Markup(arrayOfElements, rightAnswer, taskId) {
       currentActiveCard.attributes.getNamedItem("data").value === rightAnswer
     ) {
       addRightChoiceClass(currentActiveCard);
-      checkingAnswerPositive(controlsBox, infoBox);
+      // checkingAnswerPositive(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
     } else {
       addWrongChoiceClass(currentActiveCard);
-      checkingAnswerNegative(controlsBox, infoBox);
+      // checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("lose", isGameStart, result);
     }
     [...listContainer.children].forEach((el) => {
       el.firstElementChild.pause();
@@ -214,15 +224,17 @@ function renderSingleChoice_5_Markup(arrayOfElements, rightAnswer, taskId) {
       matchedItem = e.target.parentElement;
     }
     // открываем кнопку ПРОВЕРИТЬ
-    if (!isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = true;
-    }
+    isGameStart = true;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    // if (!isGameStart) {
+    //   toggleOpacityAndEventsElement(btnTest);
+    //   isGameStart = true;
+    // }
     if (matchedItem.classList.contains("targetChoice_color")) {
       removeActiveCardClass(matchedItem);
       // закрываем кнопку ПРОВЕРИТЬ
       isGameStart = false;
-      toggleOpacityAndEventsElement(btnTest);
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     } else if (matchedItem.classList.contains("singleChoice_5_Card")) {
       currentActiveCard && removeActiveCardClass(currentActiveCard);
       addCheckClass(matchedItem);

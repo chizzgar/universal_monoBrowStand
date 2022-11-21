@@ -1,148 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- стили для демонстрации -->
-    <link rel="stylesheet" href="/_common_files/main.css" />
-    <link rel="stylesheet" href="styles/writeAnswer_1_standStyles.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- стили для демонстрации -->
+  <link rel="stylesheet" href="/_common_files/main.css" />
+  <link rel="stylesheet" href="styles/writeAnswer_1_standStyles.css" />
 
-    <!-- стили для тренажера -->
-    <link rel="stylesheet" href="/_common_files/main__styles.css" />
-    <link rel="stylesheet" href="styles/writeAnswer_1.css" />
+  <!-- стили для тренажера -->
+  <link rel="stylesheet" href="/_common_files/main__styles.css" />
+  <link rel="stylesheet" href="styles/writeAnswer_1.css" />
 
-    <title>Впиши ответ</title>
-  </head>
-  <body>
-    <div class="container">
-      <nav style="margin: 20px" class="navigation">
-        <a href="/">На главную</a>
-      </nav>
-      <h3>Впиши ответ - перевод ⬇</h3>
-      <h4>Проситай предложения и впиши перевод</h4>
-      <h4>ответ:'There are two boards in our classroom', 'There is a parrot in our biology classrom', 'Are there posters on the walls', 'There are beautiful maps on walls','Is there a clock in your gym' </h4>
+  <title>Впиши ответ</title>
+</head>
+<body>
+  <div class="container">
+    <nav style="margin: 20px" class="navigation">
+      <a href="/">На главную</a>
+    </nav>
+    <h3>Впиши ответ - перевод ⬇</h3>
+    <h4>Проситай предложения и впиши перевод</h4>
+    <h4>ответ:'There are two boards in our classroom', 'There is a parrot in our biology classrom', 'Are there posters on the walls', 'There are beautiful maps on walls','Is there a clock in your gym' </h4>
 
-      <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
-      <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
-      <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
-      <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
-      <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="1writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="1writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </div> -->
-      <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-4">
-        <div class="writeAnswer_1_task_answer">
-          <!-- сюда вставляется изменяющийся контент -->
-          <div class="">
-           <div>1. В нашем классе две доски.</div>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_1" size="100"/>.
-          </div>
-          <div class="">
-            <div>2. В нашем кабинете биологии есть попугай.</div>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text"  id="task1_2"/>.
-          </div>
-          <div class="">
-            <div>3. На стенах ест плакаты?</div>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_3"/>?
-          </div>
-          <div class="">
-            <div>4. На стенах (есть) красивые карты.</div>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_3"/>.
-          </div>
-          <div class="">
-            <div>5. В вашем спортзале есть часы?</div>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_3"/>?
-          </div>
-        </div>
-      </div>
-      <!--  -->
-    
-      <h3>Впиши ответ - перевод ⬇</h3>
-      <h4>Проситай предложения и впиши перевод</h4>
-      <h4>ответ:'There are two boards in our classroom', 'There is a parrot in our biology classrom', 'Are there posters on the walls', 'There are beautiful maps on walls','Is there a clock in your gym' </h4>
-
-      <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
-      <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
-      <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
-      <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
-      <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="1writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="1writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </div> -->
-      <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-5">
-        <div class="writeAnswer_1_task_answer">
-          <!-- сюда вставляется изменяющийся контент -->
-          <div class="">
-           <span>1. have</span>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_1"/>
-          </div>
-          <div class="">
-            <span>2. can</span>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text"  id="task1_2"/>
-          </div>
-          <div class="">
-            <span>3. catch</span>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_3"/>
-          </div>
-          <div class="">
-            <span>4. hide</span>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_3"/>
-          </div>
-          <div class="">
-            <span>5. wear</span>
-            <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt"  type="text"  id="task1_3"/>
-          </div>
-        </div>
-      </div>
-
-      <h3>Впиши ответ - инпуты, в них только цифры ⬇</h3>
-      <h4>Ответь на вопросы, впиши ответы</h4>
-      <h4>ответ: 5</h4>
-      <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
-      <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
-      <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
-      <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
-      <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+    <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
+    <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
+    <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
+    <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
+    <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
               class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
               audio-data="1writeAnswer_1_task-1"
             >
@@ -162,342 +50,367 @@
               </audio>
             </div> -->
 
-      <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-1">
-        <div class="writeAnswer_1_task_answer">
-          <!-- сюда вставляется изменяющийся контент -->
-
-          <div class="writeAnswer_1_div">
-            <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="1writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="1writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
-                audio-data="1writeAnswer_1_task-1"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-4">
+          <div class="writeAnswer_1_task_answer">
+            <!-- сюда вставляется изменяющийся контент -->
+            <div class="">
+              <div>1. В нашем классе две доски.</div>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_1" size="100" />.
             </div>
-            <p>
-              Сколько шей у пяти журавлей?
-              <input class="writeAnswer_1_task_input" min="0" type="number" />
-            </p>
-          </div>
-
-          <div class="writeAnswer_1_div">
-            <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="2writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="2writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_2.mp3"
-                audio-data="2writeAnswer_1_task-1"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
+            <div class="">
+              <div>2. В нашем кабинете биологии есть попугай.</div>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_2" />.
             </div>
-            <p>
-              Сколько хвостов у пяти коров?
-              <input class="writeAnswer_1_task_input" min="0" type="number" />
-            </p>
-          </div>
-
-          <div class="writeAnswer_1_div">
-            <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="3writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                audio-data="3writeAnswer_1_task-1"
-                id="3writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_3.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
+            <div class="">
+              <div>3. На стенах ест плакаты?</div>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_3" />?
             </div>
-            <p>Мама купила 2 пары рыб и ещё одну рыбку.</p>
-          </div>
-
-          <div class="writeAnswer_1_div">
-            <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="4writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="4writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_4.mp3"
-                audio-data="4writeAnswer_1_task-1"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
+            <div class="">
+              <div>4. На стенах (есть) красивые карты.</div>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_3" />.
             </div>
-            <p>
-              Сколько всего рыбок купила мама?
-              <input class="writeAnswer_1_task_input" min="0" type="number" />
-            </p>
-          </div>
-
-          <div class="writeAnswer_1_div">
-            <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="5writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                audio-data="5writeAnswer_1_task-1"
-                id="5writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_5.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
+            <div class="">
+              <div>5. В вашем спортзале есть часы?</div>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_3" />?
             </div>
-            <p>
-              В доме было 4 комнаты. Из одной сделали две. Сколько стало комнат?
-              <input class="writeAnswer_1_task_input" min="0" type="number" />
-            </p>
           </div>
         </div>
       </div>
-
-      <h3>Впиши ответ - инпуты цифры и текст совместно ⬇</h3>
-      <h4>
-        Реши только те примеры, где надо найти сумму чисел, впиши ответы и
-        прочти по ним название самой маленькой птички. Впиши его ниже.
-      </h4>
-      <h4>ответ: решить примеры, птичка - колибри</h4>
-
-      <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
-      <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
-      <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
-      <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
-      <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="1writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="1writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </div> -->
-
-      <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-2">
-        <div class="writeAnswer_1_task_answer">
-          <!-- сюда вставляется изменяющийся контент -->
-
-          <p>
-            <span
-              >9 - 5 =<input min="0" type="number" id="task1_1" /><span
-                class="writeAnswer_1_task1_letter"
-                >М</span
-              >
-            </span>
-            ;
-            <span
-              >4 + 4 =<input
-                min="0"
-                type="number"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                id="task1_2"
-              /><span class="writeAnswer_1_task1_letter">К</span></span
-            >;
-            <span
-              >3 - 1 =<input min="0" type="number" id="task1_3" /><span
-                class="writeAnswer_1_task1_letter"
-                >Т</span
-              ></span
-            >
-          </p>
-          <p>
-            <span
-              >2 + 2 =<input
-                min="0"
-                type="number"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                id="task1_4"
-              /><span class="writeAnswer_1_task1_letter">О</span></span
-            >;
-
-            <span
-              >5 + 2 =<input
-                min="0"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                type="number"
-                id="task1_5"
-              /><span class="writeAnswer_1_task1_letter">Л</span></span
-            >
-            ;
-            <span
-              >10 - 3 =<input min="0" type="number" id="task1_6" /><span
-                class="writeAnswer_1_task1_letter"
-                >С</span
-              ></span
-            >
-          </p>
-          <p>
-            <span
-              >4 + 1 =<input
-                min="0"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                type="number"
-                id="task1_7"
-              /><span class="writeAnswer_1_task1_letter">И</span></span
-            >;
-            <span
-              >7 - 4 =<input min="0" type="number" id="task1_8" /><span
-                class="writeAnswer_1_task1_letter"
-                >Я</span
-              ></span
-            >;
-            <span
-              >3 + 3 =<input
-                min="0"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                type="number"
-                id="task1_9"
-              /><span class="writeAnswer_1_task1_letter">Б</span></span
-            >
-          </p>
-          <p>
-            <span
-              >9 + 1 =<input
-                min="0"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                type="number"
-                id="task1_10"
-              /><span class="writeAnswer_1_task1_letter">Р</span></span
-            >;
-            <span
-              >8 - 5 =<input min="0" type="number" id="task1_11" /><span
-                class="writeAnswer_1_task1_letter"
-                >Г</span
-              ></span
-            >;
-            <span
-              >5 + 5 =<input
-                min="0"
-                class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-                type="number"
-                id="task1_12"
-              /><span class="writeAnswer_1_task1_letter">И</span></span
-            >
-          </p>
-          <p>
-            Самая маленькая птичка<input
-              class="writeAnswer_1_task_input writeAnswer_1_input1_answer"
-              type="text"
-              id="task1_13"
-            />
-          </p>
-        </div>
-      </div>
-
-      <h3>Впиши ответ - инпуты c картинкой ⬇</h3>
-      <h4>Посчитай круги на картинках и впиши ответ</h4>
-      <h4>ответ: 3,5,4</h4>
-
-      <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
-      <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
-      <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
-      <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
-      <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="1writeAnswer_1_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="1writeAnswer_1_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </div> -->
-      <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-3">
-        <div class="writeAnswer_1_task_answer">
-          <!-- сюда вставляется изменяющийся контент -->
-          <div class="writeAnswer_1_task_imgWrapper">
-            <img class="writeAnswer_1_task_image" src="Images_1/task4_1.png" />
-            <input class="writeAnswer_1_task_input" min="0" type="number" />
-          </div>
-          <div class="writeAnswer_1_task_imgWrapper">
-            <img class="writeAnswer_1_task_image" src="Images_1/task4_2.png" />
-            <input class="writeAnswer_1_task_input" min="0" type="number" />
-          </div>
-          <div class="writeAnswer_1_task_imgWrapper">
-            <img class="writeAnswer_1_task_image" src="Images_1/task4_3.png" />
-            <input class="writeAnswer_1_task_input" min="0" type="number" />
-          </div>
-        </div>
-      </div>
-      <!--  -->
     </div>
-  </div>
-    <!-- JS Scripts -->
+    <!--  -->
 
-    <!-- Занятия -->
-    <script src="js-data/writeAnswer_1.js" type="module"></script>
-  </body>
+    <h3>Впиши ответ - перевод ⬇</h3>
+    <h4>Проситай предложения и впиши перевод</h4>
+    <h4>ответ:'There are two boards in our classroom', 'There is a parrot in our biology classrom', 'Are there posters on the walls', 'There are beautiful maps on walls','Is there a clock in your gym' </h4>
+
+    <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
+    <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
+    <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
+    <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
+    <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
+              audio-data="1writeAnswer_1_task-1"
+            >
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--one"
+              ></div>
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--two"
+              ></div>
+              <audio
+                id="1writeAnswer_1_task-1"
+                class="writeAnswer_1_task_audio"
+                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
+              >
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </div> -->
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-5">
+          <div class="writeAnswer_1_task_answer">
+            <!-- сюда вставляется изменяющийся контент -->
+            <div class="">
+              <span>1. have</span>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_1" />
+            </div>
+            <div class="">
+              <span>2. can</span>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_2" />
+            </div>
+            <div class="">
+              <span>3. catch</span>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_3" />
+            </div>
+            <div class="">
+              <span>4. hide</span>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_3" />
+            </div>
+            <div class="">
+              <span>5. wear</span>
+              <input class="writeAnswer_1_task_input writeAnswer_1_task_input_txt" type="text" id="task1_3" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3>Впиши ответ - инпуты, в них только цифры ⬇</h3>
+    <h4>Ответь на вопросы, впиши ответы</h4>
+    <h4>ответ: 5</h4>
+    <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
+    <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
+    <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
+    <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
+    <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
+              audio-data="1writeAnswer_1_task-1"
+            >
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--one"
+              ></div>
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--two"
+              ></div>
+              <audio
+                id="1writeAnswer_1_task-1"
+                class="writeAnswer_1_task_audio"
+                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
+              >
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </div> -->
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-1">
+          <div class="writeAnswer_1_task_answer">
+            <!-- сюда вставляется изменяющийся контент -->
+
+            <div class="writeAnswer_1_div">
+              <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="1writeAnswer_1_task-1">
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                <audio id="1writeAnswer_1_task-1" class="writeAnswer_1_task_audio" src="sound/writeAnswer_1/sound_7_task7_1.mp3" audio-data="1writeAnswer_1_task-1">
+                  Your browser does not support the
+                  <code>audio</code> element.
+                </audio>
+              </div>
+              <p>
+                Сколько шей у пяти журавлей?
+                <input class="writeAnswer_1_task_input" min="0" type="number" />
+              </p>
+            </div>
+
+            <div class="writeAnswer_1_div">
+              <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="2writeAnswer_1_task-1">
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                <audio id="2writeAnswer_1_task-1" class="writeAnswer_1_task_audio" src="sound/writeAnswer_1/sound_7_task7_2.mp3" audio-data="2writeAnswer_1_task-1">
+                  Your browser does not support the
+                  <code>audio</code> element.
+                </audio>
+              </div>
+              <p>
+                Сколько хвостов у пяти коров?
+                <input class="writeAnswer_1_task_input" min="0" type="number" />
+              </p>
+            </div>
+
+            <div class="writeAnswer_1_div">
+              <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="3writeAnswer_1_task-1">
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                <audio audio-data="3writeAnswer_1_task-1" id="3writeAnswer_1_task-1" class="writeAnswer_1_task_audio" src="sound/writeAnswer_1/sound_7_task7_3.mp3">
+                  Your browser does not support the
+                  <code>audio</code> element.
+                </audio>
+              </div>
+              <p>Мама купила 2 пары рыб и ещё одну рыбку.</p>
+            </div>
+
+            <div class="writeAnswer_1_div">
+              <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="4writeAnswer_1_task-1">
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                <audio id="4writeAnswer_1_task-1" class="writeAnswer_1_task_audio" src="sound/writeAnswer_1/sound_7_task7_4.mp3" audio-data="4writeAnswer_1_task-1">
+                  Your browser does not support the
+                  <code>audio</code> element.
+                </audio>
+              </div>
+              <p>
+                Сколько всего рыбок купила мама?
+                <input class="writeAnswer_1_task_input" min="0" type="number" />
+              </p>
+            </div>
+
+            <div class="writeAnswer_1_div">
+              <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="5writeAnswer_1_task-1">
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                <audio audio-data="5writeAnswer_1_task-1" id="5writeAnswer_1_task-1" class="writeAnswer_1_task_audio" src="sound/writeAnswer_1/sound_7_task7_5.mp3">
+                  Your browser does not support the
+                  <code>audio</code> element.
+                </audio>
+              </div>
+              <p>
+                В доме было 4 комнаты. Из одной сделали две. Сколько стало комнат?
+                <input class="writeAnswer_1_task_input" min="0" type="number" />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <h3>Впиши ответ - инпуты цифры и текст совместно ⬇</h3>
+    <h4>
+      Реши только те примеры, где надо найти сумму чисел, впиши ответы и
+      прочти по ним название самой маленькой птички. Впиши его ниже.
+    </h4>
+    <h4>ответ: решить примеры, птичка - колибри</h4>
+
+    <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
+    <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
+    <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
+    <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
+    <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
+              audio-data="1writeAnswer_1_task-1"
+            >
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--one"
+              ></div>
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--two"
+              ></div>
+              <audio
+                id="1writeAnswer_1_task-1"
+                class="writeAnswer_1_task_audio"
+                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
+              >
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </div> -->
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-2">
+          <div class="writeAnswer_1_task_answer">
+            <!-- сюда вставляется изменяющийся контент -->
+
+            <p>
+              <span>9 - 5 =<input min="0" type="number" id="task1_1" /><span class="writeAnswer_1_task1_letter">М</span>
+              </span>
+              ;
+              <span>4 + 4 =<input min="0" type="number" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" id="task1_2" /><span class="writeAnswer_1_task1_letter">К</span></span>;
+              <span>3 - 1 =<input min="0" type="number" id="task1_3" /><span class="writeAnswer_1_task1_letter">Т</span></span>
+            </p>
+            <p>
+              <span>2 + 2 =<input min="0" type="number" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" id="task1_4" /><span class="writeAnswer_1_task1_letter">О</span></span>;
+
+              <span>5 + 2 =<input min="0" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" type="number" id="task1_5" /><span class="writeAnswer_1_task1_letter">Л</span></span>
+              ;
+              <span>10 - 3 =<input min="0" type="number" id="task1_6" /><span class="writeAnswer_1_task1_letter">С</span></span>
+            </p>
+            <p>
+              <span>4 + 1 =<input min="0" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" type="number" id="task1_7" /><span class="writeAnswer_1_task1_letter">И</span></span>;
+              <span>7 - 4 =<input min="0" type="number" id="task1_8" /><span class="writeAnswer_1_task1_letter">Я</span></span>;
+              <span>3 + 3 =<input min="0" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" type="number" id="task1_9" /><span class="writeAnswer_1_task1_letter">Б</span></span>
+            </p>
+            <p>
+              <span>9 + 1 =<input min="0" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" type="number" id="task1_10" /><span class="writeAnswer_1_task1_letter">Р</span></span>;
+              <span>8 - 5 =<input min="0" type="number" id="task1_11" /><span class="writeAnswer_1_task1_letter">Г</span></span>;
+              <span>5 + 5 =<input min="0" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" type="number" id="task1_12" /><span class="writeAnswer_1_task1_letter">И</span></span>
+            </p>
+            <p>
+              Самая маленькая птичка<input style="width: 150px;" class="writeAnswer_1_task_input writeAnswer_1_input1_answer" type="text" id="task1_13" />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <h3>Впиши ответ - инпуты c картинкой ⬇</h3>
+    <h4>Посчитай круги на картинках и впиши ответ</h4>
+    <h4>ответ: 3,5,4</h4>
+
+    <!-- в поле id (id="writeAnswer_1_task-1") указывается уникальный id для данного задания -->
+    <!-- Каждому значку звука и соответствующему ему тегу audio присваиваиваются уникальные для этой пары data-атрибут audio-data и id соответственно, по которому и будет происходить воспроизведение звуков -->
+    <!-- у инпута который участвует в получении ответа, обязательно должен быть класс "writeAnswer_1_task_input", по нему собирается правильность ответа -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_1_task_audio", по нему собираются звуки -->
+    <!-- если input предусматривает числа, то type="number", если текст то type="text" -->
+    <!-- чтобы ограничить выбор отрицательных значений дописывается min='0' -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_1_task_image, по нему происходит увеличение картинки -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
+              audio-data="1writeAnswer_1_task-1"
+            >
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--one"
+              ></div>
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--two"
+              ></div>
+              <audio
+                id="1writeAnswer_1_task-1"
+                class="writeAnswer_1_task_audio"
+                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
+              >
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </div> -->
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_1_task_wrapper" id="writeAnswer_1_task-3">
+          <div class="writeAnswer_1_task_answer">
+            <!-- сюда вставляется изменяющийся контент -->
+            <div class="writeAnswer_1_task_imgWrapper">
+              <img class="writeAnswer_1_task_image" src="Images_1/task4_1.png" />
+              <input class="writeAnswer_1_task_input" min="0" type="number" />
+            </div>
+            <div class="writeAnswer_1_task_imgWrapper">
+              <img class="writeAnswer_1_task_image" src="Images_1/task4_2.png" />
+              <input class="writeAnswer_1_task_input" min="0" type="number" />
+            </div>
+            <div class="writeAnswer_1_task_imgWrapper">
+              <img class="writeAnswer_1_task_image" src="Images_1/task4_3.png" />
+              <input class="writeAnswer_1_task_input" min="0" type="number" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+  </div>
+  </div>
+  <!-- JS Scripts -->
+
+  <!-- Занятия -->
+  <script src="js-data/writeAnswer_1.js" type="module"></script>
+</body>
 </html>

@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../../_common_files/main.css" />
-    <link rel="stylesheet" href="../../_common_files/main__styles.css" />
-    <link rel="stylesheet" href="styles/textOrder.css" />
-  </head>
-  <body>
-    <div class="container">
-      <nav style="margin: 20px" class="navigation">
-        <a href="/">На главную</a>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../../_common_files/main.css" />
+  <link rel="stylesheet" href="../../_common_files/main__styles.css" />
+  <link rel="stylesheet" href="styles/textOrder.css" />
+</head>
+<body>
+  <div class="container">
+    <nav style="margin: 20px" class="navigation">
+      <a href="/">На главную</a>
+    </nav>
 
-      <h3>
-        Восстанови порядок слов в предложениях:<br />
-        'There', 'was', 'not', 'a', 'cooker', 'in', 'the', 'kitchen'<br />
-        'There', 'were', 'not', 'any', 'plates', 'in', 'the', 'fridge'<br />
-        'There', 'was', 'not', 'any', 'salad', 'on', 'my', 'plate'<br />
-        'There', 'were', 'not', 'any', 'children', 'in', 'the', 'living',
-        'room'<br />
+    <h3>
+      Восстанови порядок слов в предложениях:<br />
+      'There', 'was', 'not', 'a', 'cooker', 'in', 'the', 'kitchen'<br />
+      'There', 'were', 'not', 'any', 'plates', 'in', 'the', 'fridge'<br />
+      'There', 'was', 'not', 'any', 'salad', 'on', 'my', 'plate'<br />
+      'There', 'were', 'not', 'any', 'children', 'in', 'the', 'living',
+      'room'<br />
 
-        ⬇
-      </h3>
-      <!-- в поле id указывается уникальный id для данного задания -->
-      <div class="trainerTaskWrapper" id="wordOrderInSentences_task-1">
-        <div class="wordOrderInSentences_textOrder">
-          <div class="wordOrderInSentences_sentences"></div>
+      ⬇
+    </h3>
+
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <!-- в поле id указывается уникальный id для данного задания -->
+        <div class="trainerTaskWrapper" id="wordOrderInSentences_task-1">
+          <div class="wordOrderInSentences_textOrder">
+            <div class="wordOrderInSentences_sentences"></div>
+          </div>
         </div>
       </div>
     </div>
-    <script src="js-data/textOrder.js" type="module"></script>
-  </body>
+
+
+  </div>
+  <script src="js-data/textOrder.js" type="module"></script>
+</body>
 </html>

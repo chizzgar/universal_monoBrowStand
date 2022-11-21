@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- стили для демонстрации -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- стили для демонстрации -->
 
-    <link rel="stylesheet" href="/_common_files/main.css" />
-    <link rel="stylesheet" href="styles/writeAnswer_2_standStyles.css" />
+  <link rel="stylesheet" href="/_common_files/main.css" />
+  <link rel="stylesheet" href="styles/writeAnswer_2_standStyles.css" />
 
-    <!-- стили для тренажера -->
+  <!-- стили для тренажера -->
 
-    <link rel="stylesheet" href="/_common_files/main__styles.css" />
-    <link rel="stylesheet" href="styles/writeAnswer_2.css" />
+  <link rel="stylesheet" href="/_common_files/main__styles.css" />
+  <link rel="stylesheet" href="styles/writeAnswer_2.css" />
 
-    <title>Впиши ответ</title>
-  </head>
-  <body>
-    <div class="container">
-      <nav style="margin: 20px" class="navigation">
-        <a href="/">На главную</a>
-      </nav>
-      <h3>Впиши ответ - выбери из выпадающего списка ⬇</h3>
-      <h4>Сравни числа</h4>
+  <title>Впиши ответ</title>
+</head>
+<body>
+  <div class="container">
+    <nav style="margin: 20px" class="navigation">
+      <a href="/">На главную</a>
+    </nav>
+    <h3>Впиши ответ - выбери из выпадающего списка ⬇</h3>
+    <h4>Сравни числа</h4>
 
-      <!-- в поле id(writeAnswer_2_task-1) указывается уникальный id для данного задания -->
+    <!-- в поле id(writeAnswer_2_task-1) указывается уникальный id для данного задания -->
 
-      <!-- у select который участвует в получении ответа, обязательно должен быть класс "writeAnswer_2_task_select", по нему собирается правильность ответа -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_2_task_image, по нему происходит увеличение картинки -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_2_task_audio", по нему собираются звуки -->
-      <!-- id  у каждого тега audio должно совпадать с атрибутом audio-data у кнопки звука -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+    <!-- у select который участвует в получении ответа, обязательно должен быть класс "writeAnswer_2_task_select", по нему собирается правильность ответа -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_2_task_image, по нему происходит увеличение картинки -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_2_task_audio", по нему собираются звуки -->
+    <!-- id  у каждого тега audio должно совпадать с атрибутом audio-data у кнопки звука -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
               class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
               audio-data="1writeAnswer_2_task-1"
             >
@@ -49,360 +49,269 @@
                 <code>audio</code> element.
               </audio>
             </div> -->
-
-      <div class="writeAnswer_2_task_wrapper" id="writeAnswer_2_task-1">
-        <!-- сюда вставляется изменяющийся контент -->
-        <div class="writeAnswer_2_task_line">
-          <div class="writeAnswer_2_task_answer">
-            <div class="writeAnswer_2_task_answer_item">
-              <p>7</p>
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">=</option>
-                <option value="3">&lt;</option>
-              </select>
-              <p>6</p>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <p>2</p>
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">=</option>
-                <option value="3">&lt;</option>
-              </select>
-              <p>7</p>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <p>5</p>
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">=</option>
-                <option value="3">&lt;</option>
-              </select>
-              <p>7</p>
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_2_task_wrapper" id="writeAnswer_2_task-1">
+          <!-- сюда вставляется изменяющийся контент -->
+          <div class="writeAnswer_2_task_line">
+            <div class="writeAnswer_2_task_answer">
+              <div class="writeAnswer_2_task_answer_item">
+                <p>7</p>
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">=</option>
+                  <option value="3">&lt;</option>
+                </select>
+                <p>6</p>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <p>2</p>
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">=</option>
+                  <option value="3">&lt;</option>
+                </select>
+                <p>7</p>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <p>5</p>
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">=</option>
+                  <option value="3">&lt;</option>
+                </select>
+                <p>7</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="writeAnswer_2_task_line">
-          <div class="writeAnswer_2_task_answer">
-            <div class="writeAnswer_2_task_answer_item">
-              <p>7</p>
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">=</option>
-                <option value="3">&lt;</option>
-              </select>
-              <p>4</p>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <p>6</p>
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">=</option>
-                <option value="3">&lt;</option>
-              </select>
-              <p>7</p>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <p>7</p>
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">=</option>
-                <option value="3">&lt;</option>
-              </select>
-              <p>7</p>
+          <div class="writeAnswer_2_task_line">
+            <div class="writeAnswer_2_task_answer">
+              <div class="writeAnswer_2_task_answer_item">
+                <p>7</p>
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">=</option>
+                  <option value="3">&lt;</option>
+                </select>
+                <p>4</p>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <p>6</p>
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">=</option>
+                  <option value="3">&lt;</option>
+                </select>
+                <p>7</p>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <p>7</p>
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">=</option>
+                  <option value="3">&lt;</option>
+                </select>
+                <p>7</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <h3>Впиши ответ - выбери из выпадающего списка ⬇</h3>
-      <h4>Сравни количество фигур</h4>
-      <!-- в поле id(writeAnswer_2_task-1) указывается уникальный id для данного задания -->
-
-      <!-- у select который участвует в получении ответа, обязательно должен быть класс "writeAnswer_2_task_select", по нему собирается правильность ответа -->
-      <!-- у картинки обязательно должен быть класс writeAnswer_2_task_image, по нему происходит увеличение картинки -->
-      <!-- у тега audio  обязательно должен быть класс "writeAnswer_2_task_audio", по нему собираются звуки -->
-      <!-- id  у каждого тега audio должно совпадать с атрибутом audio-data у кнопки звука -->
-      <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
-              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-              audio-data="1writeAnswer_2_task-1"
-            >
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--one"
-              ></div>
-              <div
-                class="buttonPlayPause__shape buttonPlayPause__shape--two"
-              ></div>
-              <audio
-                id="1writeAnswer_2_task-1"
-                class="writeAnswer_1_task_audio"
-                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </div> -->
-      <div class="writeAnswer_2_task_wrapper" id="writeAnswer_2_task-2">
-        <!-- сюда вставляется изменяющийся контент -->
-
-        <div class="writeAnswer_2_task_line">
-          <div class="writeAnswer_2_task_answer">
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="1writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="1writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/3.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_1.png"
-              />
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">&lt;</option>
-              </select>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="2writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="2writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/2.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_2.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="writeAnswer_2_task_line">
-          <div class="writeAnswer_2_task_answer">
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="3writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="3writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/4.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_3.png"
-              />
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">&lt;</option>
-              </select>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="4writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="4writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/3.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_4.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="writeAnswer_2_task_line">
-          <div class="writeAnswer_2_task_answer">
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="5writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="5writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/1.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_5.png"
-              />
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">&lt;</option>
-              </select>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="6writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="6writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/2.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_6.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="writeAnswer_2_task_line">
-          <div class="writeAnswer_2_task_answer">
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="7writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="7writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/3.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_7.png"
-              />
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <select class="writeAnswer_2_task_select">
-                <option value="0">...</option>
-                <option value="1">&gt;</option>
-                <option value="2">&lt;</option>
-              </select>
-            </div>
-            <div class="writeAnswer_2_task_answer_item">
-              <div
-                class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
-                audio-data="8writeAnswer_2_task-2"
-              >
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--one"
-                ></div>
-                <div
-                  class="buttonPlayPause__shape buttonPlayPause__shape--two"
-                ></div>
-                <audio
-                  id="8writeAnswer_2_task-2"
-                  class="writeAnswer_2_task_audio"
-                  src="sound/5.mp3"
-                >
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </div>
-              <img
-                class="writeAnswer_2_task_image"
-                src="Images_1/task8_8.png"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--  -->
     </div>
 
-    <!-- JS Scripts -->
 
-    <!-- Занятия -->
-    <script src="js-data/writeAnswer_2.js" type="module"></script>
-  </body>
+    <h3>Впиши ответ - выбери из выпадающего списка ⬇</h3>
+    <h4>Сравни количество фигур</h4>
+    <!-- в поле id(writeAnswer_2_task-1) указывается уникальный id для данного задания -->
+
+    <!-- у select который участвует в получении ответа, обязательно должен быть класс "writeAnswer_2_task_select", по нему собирается правильность ответа -->
+    <!-- у картинки обязательно должен быть класс writeAnswer_2_task_image, по нему происходит увеличение картинки -->
+    <!-- у тега audio  обязательно должен быть класс "writeAnswer_2_task_audio", по нему собираются звуки -->
+    <!-- id  у каждого тега audio должно совпадать с атрибутом audio-data у кнопки звука -->
+    <!-- иконка звука верстается так, внутри есть тег аудио, поля заполняются согласно правилам выше: <div
+              class="buttonPlayPausePlayPause_wrap buttonPlayPause--play"
+              audio-data="1writeAnswer_2_task-1"
+            >
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--one"
+              ></div>
+              <div
+                class="buttonPlayPause__shape buttonPlayPause__shape--two"
+              ></div>
+              <audio
+                id="1writeAnswer_2_task-1"
+                class="writeAnswer_1_task_audio"
+                src="sound/writeAnswer_1/sound_7_task7_1.mp3"
+              >
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </div> -->
+
+
+    <div class="temporary">
+      <div class="head">
+        <div class="drop"></div>
+        <div class="save"></div>
+        <div class="check_your"></div>
+        <div class="result"></div>
+      </div>
+      <div class="interakt_zadanie">
+        <div class="writeAnswer_2_task_wrapper" id="writeAnswer_2_task-2">
+          <!-- сюда вставляется изменяющийся контент -->
+
+          <div class="writeAnswer_2_task_line">
+            <div class="writeAnswer_2_task_answer">
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="1writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="1writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/3.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_1.png" />
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">&lt;</option>
+                </select>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="2writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="2writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/2.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_2.png" />
+              </div>
+            </div>
+          </div>
+          <div class="writeAnswer_2_task_line">
+            <div class="writeAnswer_2_task_answer">
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="3writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="3writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/4.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_3.png" />
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">&lt;</option>
+                </select>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="4writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="4writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/3.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_4.png" />
+              </div>
+            </div>
+          </div>
+          <div class="writeAnswer_2_task_line">
+            <div class="writeAnswer_2_task_answer">
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="5writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="5writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/1.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_5.png" />
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">&lt;</option>
+                </select>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="6writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="6writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/2.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_6.png" />
+              </div>
+            </div>
+          </div>
+          <div class="writeAnswer_2_task_line">
+            <div class="writeAnswer_2_task_answer">
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="7writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="7writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/3.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_7.png" />
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <select class="writeAnswer_2_task_select">
+                  <option value="0">...</option>
+                  <option value="1">&gt;</option>
+                  <option value="2">&lt;</option>
+                </select>
+              </div>
+              <div class="writeAnswer_2_task_answer_item">
+                <div class="buttonPlayPausePlayPause_wrap buttonPlayPause--play" audio-data="8writeAnswer_2_task-2">
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--one"></div>
+                  <div class="buttonPlayPause__shape buttonPlayPause__shape--two"></div>
+                  <audio id="8writeAnswer_2_task-2" class="writeAnswer_2_task_audio" src="sound/5.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </div>
+                <img class="writeAnswer_2_task_image" src="Images_1/task8_8.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+  <!-- JS Scripts -->
+
+  <!-- Занятия -->
+  <script src="js-data/writeAnswer_2.js" type="module"></script>
+</body>
 </html>
