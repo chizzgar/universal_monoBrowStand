@@ -1,5 +1,6 @@
 .writeAnswer_2_task_wrapper {
   max-width: 1000px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -36,15 +37,19 @@
   display: -ms-flexbox;
   display: flex;
   font-size: 20px;
-  width: 60%;
+  /* width: 60%; */
   margin: 5px;
   width: 100%;
-  -webkit-box-pack: center;
+  /* -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: center; */
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
 }
 .writeAnswer_2_task_answer img {
-  height: 50px;
+  /* height: 50px; */
+  height: 40px;
 }
 
 .writeAnswer_2_task_answer select {
