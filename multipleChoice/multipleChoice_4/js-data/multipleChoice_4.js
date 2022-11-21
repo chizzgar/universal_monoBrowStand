@@ -1,7 +1,4 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
-  checkingAnswerReset,
   removeActiveCardClass,
   addCheckClass,
   addRightChoiceClass,
@@ -10,9 +7,9 @@ import {
   resetSound,
   getRandomPositionToCard,
   shuffleCards,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 // на 4 элемента
@@ -276,15 +273,10 @@ function renderMultipleChoice_4(arrayOfElements, rightAnswer, taskId) {
     createPictureCardsMarkup(shuffleCards([...arrayOfElements]))
   );
 
-  renderCheckPanel(taskWrapper, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(taskWrapper);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   listContainer.addEventListener("click", matchingHandler);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   const audioFiles = taskWrapper.querySelectorAll(".multipleChoice_4_audio");
 
@@ -345,9 +337,8 @@ function renderMultipleChoice_4(arrayOfElements, rightAnswer, taskId) {
       matchedItem = e.target;
     }
     if (!isGameStart) {
-      // открываем кнопку ПРОВЕРИТЬ
-      toggleOpacityAndEventsElement(btnTest);
       isGameStart = true;
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     }
 
     if (matchedItem) {
@@ -361,9 +352,8 @@ function renderMultipleChoice_4(arrayOfElements, rightAnswer, taskId) {
       el.classList.contains("targetChoice_color")
     );
     if (!isSelectedItems) {
-      // закрываем кнопку ПРОВЕРИТЬ
       isGameStart = false;
-      toggleOpacityAndEventsElement(btnTest);
+      checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
     }
   }
 
@@ -383,8 +373,10 @@ function renderMultipleChoice_4(arrayOfElements, rightAnswer, taskId) {
       }
     });
     if (winCount === rightAnswersLength) {
-      checkingAnswerPositive(controlsBox, infoBox);
-    } else checkingAnswerNegative(controlsBox, infoBox);
+      feedBackChanger("win", isGameStart, result);
+    } else {
+      feedBackChanger("lose", isGameStart, result);
+    }
 
     resetSound(soundSetStates);
 
@@ -392,7 +384,6 @@ function renderMultipleChoice_4(arrayOfElements, rightAnswer, taskId) {
   }
 
   function onBtnResetClick() {
-    checkingAnswerReset(controlsBox, infoBox);
     [...listContainer.children].forEach((item) => {
       getRandomPositionToCard(item);
       removeActiveCardClass(item);
@@ -401,10 +392,9 @@ function renderMultipleChoice_4(arrayOfElements, rightAnswer, taskId) {
     resetSound(soundSetStates);
 
     listContainer.addEventListener("click", matchingHandler);
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 }
