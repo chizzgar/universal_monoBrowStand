@@ -17,26 +17,36 @@
       </nav>
 
       <h3>Обведи букву ⬇</h3>
-      <!-- в поле id указывается уникальный id для данного задания -->
-      <div class="trainerTaskWrapper" id="letterTracing_task-1">
-        <div class="letterTracing_letter_wrapper">
-          <div class="letterTracing_letter_img">
-            <canvas class="letterTracing_letter_canvas"></canvas>
-            <!--вставляем нужную картинку-->
-            <img
-              class="letterTracing_letter_picture"
-              src="Images_1/letterTraicing/apple.png"
-            />
-          </div>
+      <div class="temporary">
+        <div class="head">
+          <div class="drop"></div>
+          <div class="save"></div>
+          <div class="check_your"></div>
+          <div class="result"></div>
+        </div>
+        <div class="interakt_zadanie">
+          <!-- в поле id указывается уникальный id для данного задания -->
+          <div class="trainerTaskWrapper" id="letterTracing_task-1">
+            <div class="letterTracing_letter_wrapper">
+              <div class="letterTracing_letter_img">
+                <canvas class="letterTracing_letter_canvas"></canvas>
+                <!--вставляем нужную картинку-->
+                <img
+                  class="letterTracing_letter_picture"
+                  src="Images_1/letterTraicing/apple.png"
+                />
+              </div>
 
-          <!--вставляем нужный аудиофайл-->
-          <audio
-            class="letterTracing_letter_audio"
-            src="sound/letterTraicing/A.mp3"
-          >
-            Your browser does not support the
-            <code>audio</code> element.
-          </audio>
+              <!--вставляем нужный аудиофайл-->
+              <audio
+                class="letterTracing_letter_audio"
+                src="sound/letterTraicing/A.mp3"
+              >
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </div>
+          </div>
         </div>
       </div>
       <!--  -->

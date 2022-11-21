@@ -1,10 +1,8 @@
 import {
   scaleImage,
-  checkingAnswerPositive,
-  checkingAnswerReset,
-  renderCheckPanel,
-  getCheckPanelElements,
   togglePointerEventElement,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -47,6 +45,7 @@ function renderLetterTracing(taskId, letter, winPercent, font, rgbValues) {
 
   const { redValue, greenValue, blueValue } = getRGB(letterInsideColor);
 
+  let isGameStart = false;
   let pixels = null;
   let letterpixels = null;
   let mousedown = false;
@@ -60,8 +59,7 @@ function renderLetterTracing(taskId, letter, winPercent, font, rgbValues) {
   const audio = taskWrapper.querySelector(".letterTracing_letter_audio");
   let c = taskWrapper.querySelector(".letterTracing_letter_canvas");
 
-  renderCheckPanel(taskWrapper, false);
-  const { btnReset, controlsBox, infoBox } = getCheckPanelElements(taskWrapper);
+  const { btnReset, result } = getOldPanelLinks(taskWrapper);
 
   let cx = c.getContext("2d");
   cx.font = `${fontWeightLetter} ${fontSizeLetter} ${font}`;
@@ -188,7 +186,8 @@ function renderLetterTracing(taskId, letter, winPercent, font, rgbValues) {
     if (getpixelamount(r, g, b) / letterpixels > winPercent) {
       if (!isLetterComplete) {
         pulse();
-        checkingAnswerPositive(controlsBox, infoBox);
+        feedBackChanger("win", isGameStart, result);
+
         togglePointerEventElement(taskWrapper.firstElementChild);
       }
     }
@@ -223,6 +222,7 @@ function renderLetterTracing(taskId, letter, winPercent, font, rgbValues) {
   }
 
   function onmousedown(ev) {
+    isGameStart = true;
     mousedown = true;
     ev.preventDefault();
   }
@@ -244,7 +244,10 @@ function renderLetterTracing(taskId, letter, winPercent, font, rgbValues) {
 
   function reloadTask() {
     isLetterComplete = false;
-    checkingAnswerReset(controlsBox, infoBox);
+
+    isGameStart = false;
+
+    feedBackChanger("reset", isGameStart, result);
     setupCanvas();
     if (taskWrapper.firstElementChild.classList.contains("noEventElement")) {
       togglePointerEventElement(taskWrapper.firstElementChild);
