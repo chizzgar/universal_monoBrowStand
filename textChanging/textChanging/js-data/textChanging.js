@@ -2,11 +2,9 @@ import {
   checkingAnswerPositive,
   checkingAnswerNegative,
   checkingAnswerReset,
-  addRightChoiceClass,
-  addWrongChoiceClass,
-  toggleOpacityAndEventsElement,
-  renderCheckPanel,
-  getCheckPanelElements,
+  checkButton_classList_changer,
+  feedBackChanger,
+  getOldPanelLinks,
 } from "../../../_common_files/common_scripts.js";
 
 (() => {
@@ -148,23 +146,15 @@ function renderEditableSentences(data, taskId) {
   );
 
   fillSentences();
-
-  renderCheckPanel(task, true);
-  const { btnReset, btnTest, controlsBox, infoBox } =
-    getCheckPanelElements(task);
-  // закрываем кнопку ПРОВЕРИТЬ
-  toggleOpacityAndEventsElement(btnTest);
+  // получение кнопок
+  const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   btnReset.addEventListener("click", onReloadBtnClick);
-  btnTest.addEventListener("click", onCheckTaskBtnClick);
   sentences.addEventListener("keydown", onChangeSentence);
 
   function onChangeSentence(e) {
-    // открываем кнопку ПРОВЕРИТЬ
-    if (!isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = true;
-    }
+    isGameStart = true;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
   }
 
   function onReloadBtnClick() {
@@ -172,15 +162,12 @@ function renderEditableSentences(data, taskId) {
     sentences.innerHTML = "";
     fillSentences();
     sentences.addEventListener("keydown", onChangeSentence);
-
-    // закрываем кнопку ПРОВЕРИТЬ
-    if (isGameStart) {
-      toggleOpacityAndEventsElement(btnTest);
-      isGameStart = false;
-    }
+    isGameStart = false;
+    checkButton_classList_changer(isGameStart, onBtnTestClick, btnTest);
+    feedBackChanger("reset", isGameStart, result);
   }
 
-  function onCheckTaskBtnClick() {
+  function onBtnTestClick() {
     let winVar = 0;
     [...sentences.children].forEach((elem, index) => {
       let winCount = 0;
@@ -189,18 +176,18 @@ function renderEditableSentences(data, taskId) {
         if (
           (data[index][idx].status === statusTrue &&
             data[index][idx].word.toLowerCase() ===
-              child.innerText.toLowerCase().trim()) ||
+            child.innerText.toLowerCase().trim()) ||
           (data[index][idx].status === statusFalse &&
             data[index][idx].rightWord.toLowerCase() ===
-              child.innerText.toLowerCase().trim())
+            child.innerText.toLowerCase().trim())
         ) {
           winCount += 1;
         }
       });
       if (winCount === elem.children.length) {
         winVar += 1;
-        addRightChoiceClass(elem);
-      } else addWrongChoiceClass(elem);
+        feedBackChanger("win", isGameStart, result);
+      } else feedBackChanger("lose", isGameStart, result);
     });
 
     if (winVar === data.length) {
