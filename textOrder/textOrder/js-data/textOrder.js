@@ -42,7 +42,6 @@ function renderTextOrder(data, taskId) {
 
   sentences.addEventListener("pointerdown", mouseDown);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function fillSentences() {
     data.forEach((item) => {

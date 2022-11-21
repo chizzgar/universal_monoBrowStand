@@ -55,7 +55,6 @@ function renderWriteAnswer_2_Markup(rightAnswers, taskId) {
   const { btnReset, btnTest, result } = getOldPanelLinks(taskWrapper);
 
   btnReset.addEventListener("click", onReloadBtnClick);
-  btnTest.addEventListener("click", onBtnTestClick);
   taskWrapper.addEventListener("pointerdown", onAnswerClick);
   taskWrapper.addEventListener("change", onInputChange);
 

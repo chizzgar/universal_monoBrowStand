@@ -129,7 +129,6 @@ function renderSingleChoice_5_Markup(arrayOfElements, rightAnswer, taskId) {
 
   listContainer.addEventListener("click", matchingHandler);
   btnReset.addEventListener("click", onBtnResetClick);
-  btnTest.addEventListener("click", onBtnTestClick);
 
   function createCardsMarkup(pictures) {
     return pictures
