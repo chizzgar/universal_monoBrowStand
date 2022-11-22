@@ -135,6 +135,8 @@ function renderPuzzle(taskId, lettersPuzzleArr) {
     }
 
     let clickWithoutMove = true;
+    let currentDroppable = null;
+
     function onMouseMove(event) {
       if (clickWithoutMove) {
         draggingItem.style.position = "absolute";
@@ -171,6 +173,30 @@ function renderPuzzle(taskId, lettersPuzzleArr) {
       draggingItem.hidden = false;
 
       if (!elemBelow) return;
+      // ОБРАБОТКА СОБЫТИЯ НАХОЖДЕНИЯ НАД БЛОКОМ И ВЫЛЕТА ИЗ НЕГО (ПО НЕОБХОДИМИОСТИ)
+
+      let droppableBelow = elemBelow.closest(".wordPuzzle_dropWord"); // БЕРЁМ НУЖНЫЙ БЛОК
+
+      if (currentDroppable != droppableBelow) {
+        if (currentDroppable) {
+          // ЛОГИКА ОБРАБОТКИ ПРОЦЕССА "ВЫЛЕТА" ИЗ DROPPABLE
+          leaveDroppable(currentDroppable);
+        }
+        currentDroppable = droppableBelow;
+        // ЛОГИКА ОБРАБОТКИ ПРОЦЕССА, КОГДА МЫ "ВЛЕТАЕМ" В ЭЛЕМЕНТ
+        if (currentDroppable) {
+          enterDroppable(currentDroppable);
+        }
+      }
+    }
+    // КОГДА НАД ВЫБРАННЫМ БЛОКОМ
+    function enterDroppable(currentDroppable) {
+      !currentDroppable.hasChildNodes() &&
+        currentDroppable.classList.add("wordPuzzle_backgroundDrop");
+    }
+    // КОДА ВЫЛЕТЕЛИ ИЗ БЛОКА
+    function leaveDroppable(currentDroppable) {
+      currentDroppable.classList.remove("wordPuzzle_backgroundDrop");
     }
 
     document.addEventListener("pointermove", onMouseMove);
@@ -198,6 +224,9 @@ function renderPuzzle(taskId, lettersPuzzleArr) {
       } else {
         dropAppend(elemDraggingStartPlace, draggingItem);
       }
+      currentDroppable &&
+        currentDroppable.classList.remove("wordPuzzle_backgroundDrop");
+
       checkPuzzleWord();
       draggingItem.removeEventListener("pointerup", onpointerup);
     }
