@@ -56,10 +56,10 @@ function renderPuzzle(taskId, lettersPuzzleArr) {
   function changeInteraction() {
     removeActiveCardClass(wordPuzzle_dropWrapper);
     lettersPuzzleArr[interaction].split("").forEach((elem) => {
-      const dropPalce = document.createElement("div");
-      dropPalce.classList.add("wordPuzzle_dropWord");
-      dropPalce.setAttribute("drop-data", elem);
-      wordPuzzle_dropWrapper.appendChild(dropPalce);
+      const dropPlace = document.createElement("div");
+      dropPlace.classList.add("wordPuzzle_dropWord");
+      dropPlace.setAttribute("drop-data", elem);
+      wordPuzzle_dropWrapper.appendChild(dropPlace);
     });
 
     const arrPuzz = [...lettersPuzzleArr.map((elem) => elem.split(""))];
